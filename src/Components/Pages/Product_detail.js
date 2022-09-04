@@ -137,10 +137,12 @@ function Product_detail(props) {
                                                 </div>
                                                 <div className="quickview-button">
                                                     <div className="quickview-cart button">
-                                                        <a href="product-details.html" className="btn--lg btn--black font-weight--reguler text-white">Add to cart</a>
+                                                        {/* <a href="product-details.html" className="btn--lg btn--black font-weight--reguler text-white">Add to cart</a> */}
+                                                        <NavLink exact to={"/cart"} className="btn--lg btn--black font-weight--reguler text-white">Add to cart</NavLink>
                                                     </div>
                                                     <div className="quickview-wishlist button">
-                                                        <a title="Add to wishlist" href="#"><i className="icon-heart" /></a>
+                                                        {/* <a title="Add to wishlist" href="#"><i className="icon-heart" /></a> */}
+                                                        <NavLink exact to={"/whishlist"}><i className="icon-heart" /></NavLink>
                                                     </div>
                                                 </div>
                                             </div>

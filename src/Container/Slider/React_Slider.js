@@ -1,93 +1,104 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { NavLink } from "react-router-dom";
 
-export default class React_Slider extends Component {
-    render() {
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        };
-        return (
+export default function React_Slider() {
+    
+    var settings = {
+        // loop: true,
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        speed: 600,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false
+    };
+    return (
+        <Slider {...settings}>
             <div>
-                <Slider {...settings}>
-                    <div className="hero-area hero-slider-one">
-                        <div className="single-hero-slider-one bg-img" data-bg="assets/images/hero/home-default-1.webp">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="hero-text-one">
-                                            <h6 className="text-color-primary mb-10">
-                                                CHAIR <br /> COLLECTION <br /> 2022
-                                            </h6>
-                                            <h1 className="hero-title">
-                                                Welcome To <br /> Helendo Store
-                                            </h1>
-                                            <p className="mt-30"> Many desktop publishing packages and web page editors now use <br />
-                                                Lorem Ipsum as their default model text
-                                            </p>
-                                            <div className="button-box mt-30">
-                                                <button className="hero-btn-one btn">Shop now <i className="icon-arrow-right" /></button>
-                                            </div>
+                <div className="single-hero-slider-10">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+
+                                <div className="hero-content-wrap">
+                                    <div className="hero-text-7 mt-lg-5">
+                                        <h5 className="mb-20 text-color-primary">
+                                            Helendo store
+                                        </h5>
+                                        <h1>Spice jars</h1>
+                                        <p className="mt-30">There are many variations of passages of Lorem Ipsum available, but <br /> the majority have suffered alteration in some formr.</p>
+                                        <div className="button-box section-space--mt_60">
+                                            <a href="#" className="text-btn-normal font-weight--reguler font-lg-p">Shop Now <i className="icon-arrow-right" /></a>
+                                        </div>
+                                    </div>
+                                    <div className="inner-images">
+                                        <div className="image-one">
+                                            <img src="assets/images/hero/home-collection-1.webp" width={644} height={465} className="img-fluid" alt="Image" />
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-                        <div className="single-hero-slider-one bg-img" data-bg="assets/images/hero/home-default-2.webp">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="hero-text-one">
-                                            <h6 className="text-color-primary mb-10">
-                                                CHAIR <br /> COLLECTION <br /> 2022
-                                            </h6>
-                                            <h1 className="hero-title">
-                                                Welcome To <br /> Helendo Store
-                                            </h1>
-                                            <p className="mt-30"> Many desktop publishing packages and web page editors now use <br />
-                                                Lorem Ipsum as their default model text
-                                            </p>
-                                            <div className="button-box mt-30">
-                                                {/* <a href="shop-3-column.html" className="hero-btn-one btn">Shop now <i className="icon-arrow-right" /></a> */}
-                                                <NavLink exact to={"/shop_col"} className="hero-btn-one btn">Shop now <i className="icon-arrow-right" /></NavLink>
-                                            </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className="single-hero-slider-10">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="hero-content-wrap">
+                                    <div className="hero-text-7 mt-lg-5">
+                                        <h5 className="mb-20 text-color-primary">
+                                            Helendo store
+                                        </h5>
+                                        <h1>Rattan Bag</h1>
+                                        <p className="mt-30">There are many variations of passages of Lorem Ipsum available, but <br /> the majority have suffered alteration in some formr.</p>
+                                        <div className="button-box section-space--mt_60">
+                                            <a href="#" className="text-btn-normal font-weight--reguler font-lg-p">Shop Now <i className="icon-arrow-right" /></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="single-hero-slider-one bg-img" data-bg="assets/images/hero/home-default-3.webp">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="hero-text-one">
-                                            <h6 className="text-color-primary mb-10">
-                                                CHAIR <br /> COLLECTION <br /> 2022
-                                            </h6>
-                                            <h1 className="hero-title">
-                                                Welcome To <br /> Helendo Store
-                                            </h1>
-                                            <p className="mt-30"> Many desktop publishing packages and web page editors now use <br />
-                                                Lorem Ipsum as their default model text
-                                            </p>
-                                            <div className="button-box mt-30">
-                                                {/* <a href="shop-3-column.html" className="hero-btn-one btn">Shop now <i className="icon-arrow-right" /></a> */}
-                                                <NavLink exact to={"/shop_col"} className="hero-btn-one btn">Shop now <i className="icon-arrow-right" /></NavLink>
-                                            </div>
+                                    <div className="inner-images">
+                                        <div className="image-one">
+                                            <img src="assets/images/hero/home-collection-2.webp" width={622} height={390} className="img-fluid" alt="Image" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </Slider>
+                </div>
             </div>
-        );
-    }
+            <div>
+                <div className="single-hero-slider-10">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="hero-content-wrap">
+                                    <div className="hero-text-7 mt-lg-5">
+                                        <h5 className="mb-20 text-color-primary">
+                                            Helendo store
+                                        </h5>
+                                        <h1>Alarm Clock</h1>
+                                        <p className="mt-30">There are many variations of passages of Lorem Ipsum available, but <br /> the majority have suffered alteration in some formr.</p>
+                                        <div className="button-box section-space--mt_60">
+                                            <a href="#" className="text-btn-normal font-weight--reguler font-lg-p">Shop Now <i className="icon-arrow-right" /></a>
+                                        </div>
+                                    </div>
+                                    <div className="inner-images">
+                                        <div className="image-one">
+                                            <img src="assets/images/hero/home-collection-3.webp" width={431} height={385} className="img-fluid" alt="Image" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </Slider>
+    );
 }

@@ -1,0 +1,17 @@
+export const ADD_TO_CART = "ADD_TO_CART"
+export const REMOVE_TO_CART = "REMOVE_TO_CART"
+export const EMPTY_TO_CART = "EMPTY_TO_CART"
+
+export const EMAIL_VARIFICATION ="EMAIL_VARIFICATION"
+export const AUTH_LOGIN = "AUTH_LOGIN"
+
+export const LOGIN_FORM = "LOGIN_FORM"
+export const LOGED_FORM = "LOGED_FORM"
+
+export const LOGOUT_USER = "LOGOUT_USER"
+export const LOGGEDOUT_USER = "LOGGEDOUT_USER"
+
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
+
+export const SET_ALERT = "SET_ALERT"
+export const RESET_ALERT = "RESET_ALERT"

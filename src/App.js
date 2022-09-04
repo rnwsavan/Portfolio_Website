@@ -20,39 +20,53 @@ import Cart from './Components/Pages/Cart';
 import Blog from './Components/Pages/Blog';
 import Account from './Components/Pages/Account';
 import { Route, Switch } from 'react-router-dom';
-import Shop_carousel from './Components/Pages/Shop_carousel';
 import Product_detail from './Components/Pages/Product_detail';
 import Blog_grid from './Components/Pages/Blog_grid';
+import PublicRoute from './Routes/PublicRoute';
+import PrivateRoute from './Routes/PrivateRoute';
+import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
+// import { configureStore } from './Redux/Store';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './Redux/Store';
+import Categories from './Components/Pages/Categories';
 
 
 function App() {
+  // const store = configureStore();
   return (
     <>
-      <Header />
-      <Switch>
-        <Route exact path={"/"} component={Home} />
-        <Route exact path={"/about_us"} component={About_us} />
-        <Route exact path={"/account"} component={Account} />
-        <Route exact path={"/login"} component={Login} />
-        <Route exact path={"/faq"} component={Faq} />
-        <Route exact path={"/error"} component={Error_Page} />
-        <Route exact path={"/contact"} component={Contact} />
-        <Route exact path={"/comming"} component={Comming_Soon} />
-        <Route exact path={"/checkout"} component={Checkout} />
-        <Route exact path={"/cart"} component={Cart} />
-        <Route exact path={"/blog"} component={Blog} />
-        <Route exact path={"/blog_grid"} component={Blog_grid} />
-        <Route exact path={"/order"} component={Order} />
-        <Route exact path={"/product_groupped"} component={Product_groupped} />
-        <Route exact path={"/product_detail"} component={Product_detail} />
-        <Route exact path={"/product_sale"} component={Product_on_sale} />
-        <Route exact path={"/shop_border"} component={Shop_border} />
-        <Route exact path={"/shop_carousel"} component={Shop_carousel} />
-
-        <Route exact path={"/shop_sidebar"} component={Shop_sidebar} />
-        <Route exact path={"/whishlist"} component={Wishlist} />
-      </Switch>
-      <Footer />
+      <SnackbarProvider maxSnack={3}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor} >
+              <Header />
+              <Switch>
+                <PublicRoute exact path={"/"} component={Home} />
+                <PublicRoute exact path={"/category"} component={Categories} />
+                <PublicRoute exact path={"/home"} component={Home} />
+                <PublicRoute exact path={"/about_us"} component={About_us} />
+                <PrivateRoute exact path={"/account"} component={Account} />
+                <PublicRoute exact path={"/login"} component={Login} />
+                <PublicRoute exact path={"/faq"} component={Faq} />
+                <PublicRoute exact path={"/error"} component={Error_Page} />
+                <PublicRoute exact path={"/contact"} component={Contact} />
+                <PublicRoute exact path={"/comming"} component={Comming_Soon} />
+                <PrivateRoute exact path={"/checkout"} component={Checkout} />
+                <PrivateRoute exact path={"/cart"} component={Cart} />
+                <PublicRoute exact path={"/blog"} component={Blog} />
+                <PublicRoute exact path={"/blog_grid"} component={Blog_grid} />
+                <PrivateRoute exact path={"/order"} component={Order} />
+                <PublicRoute exact path={"/product_groupped"} component={Product_groupped} />
+                <PublicRoute exact path={"/product_detail"} component={Product_detail} />
+                <PublicRoute exact path={"/product_sale"} component={Product_on_sale} />
+                <PublicRoute exact path={"/shop_border"} component={Shop_border} />
+                <PublicRoute exact path={"/shop_sidebar"} component={Shop_sidebar} />
+                <Route exact path={"/whishlist"} component={Wishlist} />
+              </Switch>
+              <Footer />
+          </PersistGate>
+        </Provider>
+      </SnackbarProvider>
     </>
   );
 }
