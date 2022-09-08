@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getcategorydata } from '../../Redux/Action/category.action';
 import Categories from './Categories';
 
 function Shop_sidebar(props) {
-    const [data, setData] = useState(Categories);
-    const filterResult = (catItem) => {
-        const result = Categories.filter((curData) => {
-            return curData.catagory === catItem
-        });
-        setData(result);
-    }
+    const [category, setCategory] = useState([]);
+
+    const dispatch = useDispatch()
+
+    const categorys = useSelector(state => state.category)
+
+    useEffect(
+        () => {
+            dispatch(getcategorydata())
+            setCategory(categorys.category)
+        },
+        []
+    )
+
+
+
+    console.log(categorys.category);
+
+
+
+    // const filterResult = (Item) => {
+    //     const result = category.filter((Data) => {
+    //         return Data.Categories.category === Item
+    //     });
+    //     setCategory(result);
+    // }
+
+    let finalData  =   category.length > 0 ? category : categorys.category;
     return (
         <div>
             {/* breadcrumb-area start */}
@@ -46,18 +69,6 @@ function Shop_sidebar(props) {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-lg-3 col-md-3 order-md-1 order-2  small-mt__40">
-                                        <div className="shop-widget widget-shop-categories">
-                                            <div className="product-filter">
-                                                <h6 className="mb-20">Categories</h6>
-                                                <ul className="widget-nav-list">
-                                                    <li><a href="#" onClick={()=>setData(Categories)}>All</a></li>
-                                                    <li><a href="#" onClick={() => filterResult('accessories')}>Accessories</a></li>
-                                                    <li><a href="#" onClick={() => filterResult('chair')}>Chair</a></li>
-                                                    <li><a href="#" onClick={() => filterResult('decoration')}>Decoration</a></li>
-                                                    <li><a href="#" onClick={() => filterResult('furniture')}>Furniture</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
                                         {/* Product Filter */}
                                         <div className="shop-widget widget-color">
                                             <div className="product-filter">
@@ -114,14 +125,13 @@ function Shop_sidebar(props) {
                                                     <div className="shop-toolbar__item shop-short-by">
                                                         <ul>
                                                             <li>
-                                                                <a href="#">Sort by: <span className="d-none d-sm-inline-block">Default</span> <i className="fa fa-angle-down angle-down" /></a>
+                                                                <a href="#">Sort by: <span className="d-none d-sm-inline-block">Categories</span> </a>
                                                                 <ul>
-                                                                    <li className="active"><a href="#">Default sorting</a></li>
-                                                                    <li><a href="#">Sort by popularity</a></li>
-                                                                    <li><a href="#">Sort by average rating</a></li>
-                                                                    <li><a href="#">Sort by latest</a></li>
-                                                                    <li><a href="#">Sort by price: low to high</a></li>
-                                                                    <li><a href="#">Sort by price: high to low</a></li>
+                                                                    <li><a href="#" >All</a></li>
+                                                                    <li><a href="#">Accessories</a></li>
+                                                                    <li><a href="#">Chair</a></li>
+                                                                    <li><a href="#" >Decoration</a></li>
+                                                                    <li><a href="#" >Furniture</a></li>
                                                                 </ul>
                                                             </li>
                                                         </ul>
@@ -154,13 +164,14 @@ function Shop_sidebar(props) {
                                         <div className="tab-content">
                                             <div className="tab-pane fade show active" id="tab_columns_01">
                                                 <div className="row">
-                                                    {data.map((values) => {
-                                                        const { id, title, price, image } = values;
+                                                    {finalData.map((values) => {
+                                                        const { id, categoryname, price, file, url } = values;
                                                         return (
                                                             <>
                                                                 <div className="col-lg-4 col-md-4 col-sm-6" key={id}>
                                                                     {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
+                                                                    <div className="single-product-item text-center" >
+                                                                        
                                                                         <div className="products-images">
                                                                             {/* <a href="product-details.html" className="product-thumbnail">
                                                                     <img src="assets/images/product/1_1-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
@@ -168,7 +179,8 @@ function Shop_sidebar(props) {
                                                                         Out Of Stock
                                                                     </span>
                                                                 </a> */}
-                                                                            <NavLink exact to={"/product_detail"}><img src={image} className="img-fluid" alt="Product Images" width={300} height={300} />
+                                                                            <NavLink exact to={"/product_detail"}>
+                                                                                <img src={url} className="img-fluid" alt="Product Images" width={300} height={300} />
                                                                             </NavLink>
                                                                             <div className="product-actions">
                                                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
@@ -182,200 +194,7 @@ function Shop_sidebar(props) {
                                                                         <div className="product-content">
                                                                             <h6 className="prodect-title">
                                                                                 {/* <a href="product-details.html">Teapot with black tea</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_2-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}><img src={image} className="img-fluid" alt="Product Images" width={300} height={300} /></NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/prodect_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Simple Chair</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_3-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}> <img src={image} className="img-fluid" alt="Product Images" width={300} height={300} /></NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Smooth Disk</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_4-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                    <span className="ribbon onsale">
-                                                                        -14%
-                                                                    </span>
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}> <img src={image} className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                            </NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Wooden Flowerpot</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_5-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}><img src={image} className="img-fluid" alt="Product Images" width={300} height={300} /></NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Living room &amp; Bedroom lights</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_6-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}><img src={image} className="img-fluid" alt="Product Images" width={300} height={300} /></NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Gray lamp</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_7-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}><img src={image} className="img-fluid" alt="Product Images" width={300} height={300} /></NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Decoration wood</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
-                                                                            </h6>
-                                                                            <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>{/* Single Product Item End */}
-                                                                </div>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6">
-                                                                    {/* Single Product Item Start */}
-                                                                    <div className="single-product-item text-center">
-                                                                        <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_8-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                </a> */}
-                                                                            <NavLink exact to={"/product_detail"}> <img src={image} className="img-fluid" alt="Product Images" width={300} height={300} /></NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="product-content">
-                                                                            <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Teapot with black tea</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{title}</NavLink>
+                                                                                <NavLink exact to={"/product_detail"}>{categoryname}</NavLink>
                                                                             </h6>
                                                                             <div className="prodect-price">
                                                                                 <span className="new-price">{price}</span>

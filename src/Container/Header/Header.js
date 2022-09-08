@@ -178,16 +178,24 @@ function Header(props) {
                                         </a>
                                     </div>
                                     <div className="header-right-items d-none d-md-block">
-                                        <a href="wishlist.html" className="header-cart">
+                                        {/* <a href="wishlist.html" className="header-cart">
                                             <i className="icon-heart" />
                                             <span className="item-counter">3</span>
-                                        </a>
+                                        </a> */}
+                                        <NavLink exact to={"/whishlist"} className="header-cart">
+                                        <i className="icon-heart" />
+                                            <span className="item-counter">3</span>
+                                        </NavLink>
                                     </div>
                                     <div className="header-right-items">
-                                        <a href="#miniCart" className=" header-cart minicart-btn toolbar-btn header-icon">
+                                        {/* <a href="#miniCart" className=" header-cart minicart-btn toolbar-btn header-icon">
                                             <i className="icon-bag2" />
                                             <span className="item-counter" onClick={() => increment()}>0</span>
-                                        </a>
+                                        </a> */}
+                                        <NavLink exact to={"/cart"} className=" header-cart minicart-btn toolbar-btn header-icon">
+                                        <i className="icon-bag2" />
+                                            <span className="item-counter" onClick={() => increment()}>0</span>
+                                        </NavLink>
                                     </div>
                                     <div className="header-right-items d-block d-md-none">
                                         <a href="javascript:void(0)" className="search-icon" id="search-overlay-trigger">

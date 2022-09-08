@@ -18,7 +18,7 @@ function Wishlist(props) {
                                     <ul className="breadcrumb-list text-center text-sm-end">
                                         <li className="breadcrumb-item">
                                             {/* <a href="index-2.html">Home</a> */}
-                                            <NavLink exact to={"/"}></NavLink>
+                                            <NavLink exact to={"/"}>Home</NavLink>
                                             </li>
                                         <li className="breadcrumb-item active">Wishlist</li>
                                     </ul>
