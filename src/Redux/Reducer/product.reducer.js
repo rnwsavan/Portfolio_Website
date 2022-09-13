@@ -2,32 +2,32 @@ import * as ActionTypes from "../ActionType"
 
 const initialState = {
     isLoading: false,
-    category: [],
+    product: [],
     errors: ''
 }
 
-export const categoriesreducer = (state = initialState, action) => {
+export const productreducer = (state = initialState, action) => {
     // console.log(action.type, action.payload, state);
     switch (action.type) {
-        case ActionTypes.GET_CATOGORIES:
+        case ActionTypes.GET_PRODUCTS:
             return {
                 ...state,
                 isLoading: false,
-                category: action.payload,
+                product: action.payload,
                 errors: ''
             }
-        case ActionTypes.ADD_CATOGORIES:
+        case ActionTypes.ADD_PRODUCTS:
             return {
                 ...state,
                 isLoading: false,
-                category: state.category.concat(action.payload),
+                product: state.product.concat(action.payload),
                 errors: ''
             }
-        case ActionTypes.UPDATE_CATOGORIES:
+        case ActionTypes.UPDATE_PRODUCTS:
             return {
                 ...state,
                 isLoading: false,
-                category: state.category.map((d) => {
+                product: state.product.map((d) => {
                     if (d.id === action.payload.id) {
                         return action.payload
                     } else {
@@ -36,19 +36,19 @@ export const categoriesreducer = (state = initialState, action) => {
                 }),
                 errors: ''
             };
-        case ActionTypes.DELETE_CATOGORIES:
+        case ActionTypes.DELETE_PRODUCTS:
             return {
                 ...state,
                 isLoading: false,
-                category: state.category.filter((d,i) => d.id !== action.payload),
+                product: state.product.filter((d,i) => d.id !== action.payload),
                 errors: ''
             }
 
-        case ActionTypes.ERROR_CATOGORIES:
+        case ActionTypes.ERROR_PRODUCTS:
             return {
                 ...state,
                 isLoading: false,
-                category: [],
+                product: [],
                 errors: action.payload
             }
         default:

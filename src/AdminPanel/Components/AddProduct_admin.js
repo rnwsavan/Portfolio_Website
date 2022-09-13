@@ -14,16 +14,20 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch, useSelector } from 'react-redux';
-import { addcategorydata, deletecategorydata, getcategorydata, updatecategorydata } from '../../Redux/Action/category.action';
+import { addproductdata, deleteproductdata, getproductdata, updateproductdata } from '../../Redux/Action/product.action';
+import { getcategorydata } from '../../Redux/Action/category.action';
 
-function Category_admin(props) {
-    const [open, setOpen] = React.useState(false);
+function AddProduct_admin(props) {
+    const [open, setOpen] = useState(false);
     const [data, setData] = useState([])
     const [update, setUpdate] = useState('');
-    const [filtercat, setfiltercat] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [filterdata, setfilterdata] = useState([]);
+    const products = useSelector(state => state.product)
+    const categorydata = useSelector(state => state.category)
+    // console.log(categorydata.category);
     const dispatch = useDispatch()
-    const categorys = useSelector(state => state.category)
-    console.log(categorys);
+
 
 
     const handleClickOpen = () => {
@@ -38,16 +42,20 @@ function Category_admin(props) {
     };
 
 
-    let category = {
-        categoryname: yup.string().required('enter categoryname'),
+    let product = {
+        productname: yup.string().required('enter productname'),
+        price: yup.string().required('enter producPrice'),
+        category: yup.string().required('enter productCategory'),
         file: yup.mixed().required("Please Upload File")
     }
 
-    let schema = yup.object().shape(category);
+    let schema = yup.object().shape(product);
 
     const formik = useFormik({
         initialValues: {
-            categoryname: '',
+            productname: '',
+            price: '',
+            category: '',
             file: ''
         },
         validationSchema: schema,
@@ -64,7 +72,7 @@ function Category_admin(props) {
 
     const handleupdate = (value) => {
         console.log(value)
-        dispatch(updatecategorydata(value))
+        dispatch(updateproductdata(value))
         setOpen(false)
         setUpdate()
         formik.setValues()
@@ -73,29 +81,23 @@ function Category_admin(props) {
 
     const handleSubmitdata = (value) => {
         console.log(value)
-        dispatch(addcategorydata(value))
+        dispatch(addproductdata(value))
         setOpen(false);
         loadData()
 
     }
 
     const loadData = () => {
-        setData(categorys.category)
+        setData(categorydata.category)
     }
-
-    useEffect(
-        () => {
-            // loadData()
-            dispatch(getcategorydata())
-        },
-        [])
-
 
 
     const columns = [
 
         { field: 'id', headerName: 'id', width: 130 },
-        { field: 'categoryname', headerName: 'categoryname', width: 130 },
+        { field: 'productname', headerName: 'productname', width: 130 },
+        { field: 'price', headerName: 'price', width: 130 },
+        { field: 'category', header: 'categoryname', width: 130 },
         {
             field: 'delete', headerName: 'Delete', width: 130,
             renderCell: (params) => (
@@ -132,7 +134,9 @@ function Category_admin(props) {
         setUpdate(true);
         formik.setValues({
             ...params,
-            categoryname: params.categoryname,
+            productname: params.productname,
+            price: params.price,
+            category: params.category,
             file: params.url,
             fileName: params.fileName
         });
@@ -140,25 +144,37 @@ function Category_admin(props) {
     }
 
     const handleDelete = (id) => {
-        dispatch(deletecategorydata(id))
+        dispatch(deleteproductdata(id))
         loadData()
         console.log(id);
     }
 
     const handleSearch = (val) => {
-        let fdata = categorys.category.filter((d) => (
+        let fdata = products.product.filter((d) => (
             d.id.toString().includes(val) ||
-            d.categoryname.toString().toLowerCase().includes(val.toLowerCase())
+            d.price.toString().includes(val) ||
+            d.category.toString().includes(val) ||
+            d.productname.toString().toLowerCase().includes(val.toLowerCase())
         ))
         console.log(fdata);
 
-        setfiltercat(fdata);
+        setfilterdata(fdata);
     }
 
-    let fdata = filtercat.length > 0 ? filtercat : categorys.category
+    useEffect(
+        () => {
+            loadData()
+            dispatch(getproductdata())
+            dispatch(getcategorydata())
+            setCategory(categorydata.category)
+            console.log(categorydata.category);
+        },
+        [])
+    // console.log(category);
+    let fdata = filterdata.length > 0 ? filterdata : products.product;
+    let finalData = category.length > 0 ? category : categorydata.category;
 
-    // console.log(categorys.categories);
-
+    console.log(formik.errors);
 
     return (
         <Box>
@@ -169,16 +185,16 @@ function Category_admin(props) {
                             ADD
                         </Button>
                     </center>
-                        <div>
-                            <TextField
-                                margin="dense"
-                                id="search"
-                                label="search"
-                                type="search"
-                                fullWidth
-                                variant="standard"
-                                onChange={(e) => handleSearch(e.target.value)}
-                            />
+                    <div>
+                        <TextField
+                            margin="dense"
+                            id="search"
+                            label="search"
+                            type="search"
+                            fullWidth
+                            variant="standard"
+                            onChange={(e) => handleSearch(e.target.value)}
+                        />
                     </div>
                     <div style={{ height: 400, width: '100%' }}>
                         <DataGrid
@@ -191,24 +207,53 @@ function Category_admin(props) {
 
                     </div>
                     <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>Add Category</DialogTitle>
+                        <DialogTitle>Add Product</DialogTitle>
                         <Formik value={formik}>
                             <Form onSubmit={formik.handleSubmit}>
                                 <DialogContent>
 
                                     <TextField
                                         margin="dense"
-                                        id="categoryname"
-                                        label="categoryname"
-                                        name='categoryname'
+                                        id="productname"
+                                        label="productname"
+                                        name='productname'
                                         fullWidth
                                         variant="standard"
                                         onChange={formik.handleChange}
-                                        value={formik.values.categoryname}
-                                        helperText={formik.errors.categoryname}
+                                        value={formik.values.productname}
+                                        helperText={formik.errors.productname}
                                         error={formik.errors.name ? true : false}
 
                                     />
+
+                                    <TextField
+                                        margin="dense"
+                                        id="price"
+                                        label="price"
+                                        name='price'
+                                        fullWidth
+                                        variant="standard"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.price}
+                                        helperText={formik.errors.price}
+                                        error={formik.errors.price ? true : false}
+
+                                    />
+                                    <select 
+                                    name='category' 
+                                    className='mt-3 mb-3' 
+                                    onChange={formik.handleChange}>
+                                        <option>Select Category</option>
+                                        {
+                                           finalData.map((values) => {
+                                                const { categoryname } = values;
+                                                return(
+                                                    <option value={categoryname}>{categoryname}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                   
                                     <input
                                         type="file"
                                         name="file"
@@ -236,4 +281,4 @@ function Category_admin(props) {
     );
 }
 
-export default Category_admin;
+export default AddProduct_admin;

@@ -34,8 +34,6 @@ export const addcategorydata = (data) => async (dispatch) => {
                 getDownloadURL(snapshot.ref)
                     .then(async (url) => {
                         const CategorysRef = await addDoc(collection(db, "categories"), {
-                            categories: data.categories,
-                            price: data.price,
                             categoryname: data.categoryname,
                             url: url,
                             fileName: imagestr
@@ -44,8 +42,6 @@ export const addcategorydata = (data) => async (dispatch) => {
                         dispatch({
                             type: ActionTypes.ADD_CATOGORIES, payload: {
                                 id: CategorysRef.id,
-                                categories: data.categories,
-                                price: data.price,
                                 categoryname: data.categoryname,
                                 url: url,
                                 fileName: imagestr
@@ -72,8 +68,6 @@ export const updatecategorydata = (data) => async (dispatch) => {
         if (typeof data.file === "string") {
             console.log("only data");
             await updateDoc(Categoryedit, {
-                categories: data.categories,
-                price: data.price,
                 categoryname: data.categoryname,
                 url: data.url
             });
@@ -92,8 +86,6 @@ export const updatecategorydata = (data) => async (dispatch) => {
                         getDownloadURL(snapshot.ref)
                             .then(async (url) => {
                                 await updateDoc(Categoryedit, {
-                                    categories: data.categories,
-                                    price: data.price,
                                     categoryname: data.categoryname,
                                     url: url,
                                     fileName: imagestr

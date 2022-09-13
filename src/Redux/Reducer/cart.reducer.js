@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const cartReducer = (state = initialState, action) => {
-    console.log(action.type, action.payload);
+    // console.log(action.type, action.payload);
     switch (action.type) {
         case ActionTypes.ADD_TO_CART:
             return {

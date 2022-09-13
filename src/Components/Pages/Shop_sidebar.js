@@ -2,37 +2,43 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getcategorydata } from '../../Redux/Action/category.action';
+import { getproductdata } from '../../Redux/Action/product.action';
 import Categories from './Categories';
 
 function Shop_sidebar(props) {
     const [category, setCategory] = useState([]);
+    const [Product, setProduct] = useState([]);
 
     const dispatch = useDispatch()
 
     const categorys = useSelector(state => state.category)
+    const products = useSelector(state => state.product)
 
     useEffect(
         () => {
-            dispatch(getcategorydata())
+            // dispatch(getcategorydata())
+            dispatch(getproductdata())
             setCategory(categorys.category)
+            setProduct(products.product)
         },
         []
     )
 
 
 
-    console.log(categorys.category);
+    // console.log(categorys.category);
+    console.log(products.product);
 
 
 
-    // const filterResult = (Item) => {
-    //     const result = category.filter((Data) => {
-    //         return Data.Categories.category === Item
-    //     });
-    //     setCategory(result);
-    // }
+    const filterResult = (Item) => {
+        const result = products.categorys.filter((Data) => {
+            return Data.Item === Item
+        });
+        setCategory(result);
+    }
 
-    let finalData  =   category.length > 0 ? category : categorys.category;
+    let finalData = Product.length > 0 ? Product : products.product;
     return (
         <div>
             {/* breadcrumb-area start */}
@@ -68,7 +74,22 @@ function Shop_sidebar(props) {
                         <div className="product-wrapper section-space--ptb_120">
                             <div className="container">
                                 <div className="row">
+
+
                                     <div className="col-lg-3 col-md-3 order-md-1 order-2  small-mt__40">
+                                        <div className="shop-widget widget-shop-categories">
+                                            <div className="product-filter">
+                                                <h6 className="mb-20">Categories</h6>
+                                                <ul className="widget-nav-list">
+                                                    <li><a href="#">All</a></li>
+                                                    <li><a href="#">Accessories</a></li>
+                                                    <li><a href="#">Chair</a></li>
+                                                    <li><a href="#">Decoration</a></li>
+                                                    <li><a href="#">Furniture</a></li>
+                                                    <li><a href="#">Table</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         {/* Product Filter */}
                                         <div className="shop-widget widget-color">
                                             <div className="product-filter">
@@ -117,27 +138,6 @@ function Shop_sidebar(props) {
                                     </div>
                                     <div className="col-lg-9 col-md-9  order-md-2 order-1">
                                         <div className="row">
-                                            <div className="col-lg-6 col-md-8">
-                                                <div className="shop-toolbar__items shop-toolbar__item--left">
-                                                    <div className="shop-toolbar__item shop-toolbar__item--result">
-                                                        <p className="result-count"> Showing 1–9 of 21</p>
-                                                    </div>
-                                                    <div className="shop-toolbar__item shop-short-by">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#">Sort by: <span className="d-none d-sm-inline-block">Categories</span> </a>
-                                                                <ul>
-                                                                    <li><a href="#" >All</a></li>
-                                                                    <li><a href="#">Accessories</a></li>
-                                                                    <li><a href="#">Chair</a></li>
-                                                                    <li><a href="#" >Decoration</a></li>
-                                                                    <li><a href="#" >Furniture</a></li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div className="col-lg-6 col-md-4">
                                                 <div className="shop-toolbar__items shop-toolbar__item--right">
                                                     <div className="shop-toolbar__items-wrapper">
@@ -165,13 +165,13 @@ function Shop_sidebar(props) {
                                             <div className="tab-pane fade show active" id="tab_columns_01">
                                                 <div className="row">
                                                     {finalData.map((values) => {
-                                                        const { id, categoryname, price, file, url } = values;
+                                                        const { id, productname, price, category, file, url } = values;
                                                         return (
                                                             <>
                                                                 <div className="col-lg-4 col-md-4 col-sm-6" key={id}>
                                                                     {/* Single Product Item Start */}
                                                                     <div className="single-product-item text-center" >
-                                                                        
+
                                                                         <div className="products-images">
                                                                             {/* <a href="product-details.html" className="product-thumbnail">
                                                                     <img src="assets/images/product/1_1-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
@@ -194,7 +194,7 @@ function Shop_sidebar(props) {
                                                                         <div className="product-content">
                                                                             <h6 className="prodect-title">
                                                                                 {/* <a href="product-details.html">Teapot with black tea</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{categoryname}</NavLink>
+                                                                                <NavLink exact to={"/product_detail"}>{productname}</NavLink>
                                                                             </h6>
                                                                             <div className="prodect-price">
                                                                                 <span className="new-price">{price}</span>

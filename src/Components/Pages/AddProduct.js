@@ -1,11 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { db, storage } from '../../firebase';
+import { getcategorydata } from '../../Redux/Action/category.action';
 
 export const AddProduct = () => {
   const [productName, setProductName] = useState('');
+  const [productCat, setProductCat] = useState('');
   const [productPrice, setProductPrice] = useState(0);
   const [productImg, setProductImg] = useState(null);
+  const [category, setCategory] = useState([]);
   const [error, setError] = useState('');
+
+  const dispatch = useDispatch();
+
+  // const categorys = useSelector(state => state.category)
+
+  //   useEffect(
+  //       () => {
+  //           dispatch(getcategorydata())
+  //           setCategory(categorys.category)
+  //       },
+  //       []
+  //   )
 
   const types = ['image/jpeg', 'image/png', 'image/webp']
 
@@ -39,10 +55,12 @@ export const AddProduct = () => {
       storage.ref('product-images').child(productImg.name).getDownloadURL().then(url=>{
         db.collection('products').add({
           ProductName : productName,
+          productCat : productCat,
           ProductPrice : Number(productPrice),
           ProductImg : url
         }).then(()=>{
           setProductName('');
+          setProductCat('');
           setProductPrice(0);
           setProductImg('');
           setError('');
@@ -66,6 +84,19 @@ export const AddProduct = () => {
             <br/>
             <input type={'number'} className='form-control' required 
             onChange={(e)=>setProductPrice(e.target.value)} value={productPrice}/>
+            <br/>
+            <label htmlFor='product-name'>Product Category</label>
+            <br/>
+            {/* <input type={'text'} className='form-control' required 
+            onChange={(e)=>setProductCat(e.target.value)} value={productCat}/> */}
+            <select className='form-control' required onChange={(e)=>setProductCat(e.target.value)} value={productCat}>
+              <option>All</option>
+              <option>Accessories</option>
+              <option>Chair</option>
+              <option>Decoration</option>
+              <option>Furniture</option>
+              <option>Table</option>
+            </select>
             <br/>
             <label htmlFor='product-name'>Product Image</label>
             <br/>

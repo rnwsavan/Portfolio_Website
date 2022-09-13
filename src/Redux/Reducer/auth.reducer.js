@@ -6,7 +6,7 @@ const newvalue = {
     error:''
 }
 export const authReducer =(state=newvalue ,action) =>{
-    console.log(action.type, action.payload);
+    // console.log(action.type, action.payload);
     switch (action.type){
         case ActionType.LOGED_FORM:
             return{
