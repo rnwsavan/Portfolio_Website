@@ -1,44 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getcategorydata } from '../../Redux/Action/category.action';
+import Navbar from '../../Container/Navbar/Navbar';
 import { getproductdata } from '../../Redux/Action/product.action';
-import Categories from './Categories';
 
 function Shop_sidebar(props) {
-    const [category, setCategory] = useState([]);
     const [Product, setProduct] = useState([]);
+    
 
     const dispatch = useDispatch()
-
-    const categorys = useSelector(state => state.category)
     const products = useSelector(state => state.product)
+
+    const uniqueList = [
+        "ALL",
+        ...new Set(
+            products.product.map((curElem) => {
+                return curElem.category;
+            })
+        ),
+    ];
 
     useEffect(
         () => {
-            // dispatch(getcategorydata())
             dispatch(getproductdata())
-            setCategory(categorys.category)
             setProduct(products.product)
         },
         []
     )
 
+    const filterItem = (category) => {
+        console.log("category", category);
+        if (category === "All") {
+            setProduct(products);
+            return;
+        }
 
+        const updatedList = products.product.filter((curElem1, index) => {
+            return (
+                curElem1.category === category
+            )
 
-    // console.log(categorys.category);
-    console.log(products.product);
-
-
-
-    const filterResult = (Item) => {
-        const result = products.categorys.filter((Data) => {
-            return Data.Item === Item
         });
-        setCategory(result);
-    }
+        setProduct(updatedList);
+        console.log("updatedList", updatedList);
+    };
+
 
     let finalData = Product.length > 0 ? Product : products.product;
+
+    console.log(products.product);
     return (
         <div>
             {/* breadcrumb-area start */}
@@ -81,12 +91,8 @@ function Shop_sidebar(props) {
                                             <div className="product-filter">
                                                 <h6 className="mb-20">Categories</h6>
                                                 <ul className="widget-nav-list">
-                                                    <li><a href="#">All</a></li>
-                                                    <li><a href="#">Accessories</a></li>
-                                                    <li><a href="#">Chair</a></li>
-                                                    <li><a href="#">Decoration</a></li>
-                                                    <li><a href="#">Furniture</a></li>
-                                                    <li><a href="#">Table</a></li>
+                                                
+                                                <a><Navbar filterItem={filterItem} uniqueList={uniqueList} /></a>
                                                 </ul>
                                             </div>
                                         </div>
@@ -164,40 +170,33 @@ function Shop_sidebar(props) {
                                         <div className="tab-content">
                                             <div className="tab-pane fade show active" id="tab_columns_01">
                                                 <div className="row">
-                                                    {finalData.map((values) => {
-                                                        const { id, productname, price, category, file, url } = values;
+                                                    {finalData && finalData.map((val, index) => {
                                                         return (
                                                             <>
-                                                                <div className="col-lg-4 col-md-4 col-sm-6" key={id}>
+                                                                <div className="col-lg-4 col-md-4 col-sm-6" key={val.id}>
                                                                     {/* Single Product Item Start */}
                                                                     <div className="single-product-item text-center" >
 
                                                                         <div className="products-images">
-                                                                            {/* <a href="product-details.html" className="product-thumbnail">
-                                                                    <img src="assets/images/product/1_1-300x300.webp" className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                    <span className="ribbon out-of-stock ">
-                                                                        Out Of Stock
-                                                                    </span>
-                                                                </a> */}
+                                                                        
                                                                             <NavLink exact to={"/product_detail"}>
-                                                                                <img src={url} className="img-fluid" alt="Product Images" width={300} height={300} />
+                                                                                <img src={val.url} className="img-fluid" alt="Product Images" width={300} height={300} />
                                                                             </NavLink>
                                                                             <div className="product-actions">
                                                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
 
-                                                                                {/* <a href="product-details.html"><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></a> */}
                                                                                 <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                                {/* <a href="wishlist.html"><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></a> */}
+                                                                              
                                                                                 <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
                                                                             </div>
                                                                         </div>
                                                                         <div className="product-content">
                                                                             <h6 className="prodect-title">
-                                                                                {/* <a href="product-details.html">Teapot with black tea</a> */}
-                                                                                <NavLink exact to={"/product_detail"}>{productname}</NavLink>
+                                                                               
+                                                                                <NavLink exact to={"/product_detail"}>{val.productname}</NavLink>
                                                                             </h6>
                                                                             <div className="prodect-price">
-                                                                                <span className="new-price">{price}</span>
+                                                                                <span className="new-price">{val.price}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>{/* Single Product Item End */}
