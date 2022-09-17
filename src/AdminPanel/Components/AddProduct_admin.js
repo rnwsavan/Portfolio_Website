@@ -16,6 +16,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch, useSelector } from 'react-redux';
 import { addproductdata, deleteproductdata, getproductdata, updateproductdata } from '../../Redux/Action/product.action';
 import { getcategorydata } from '../../Redux/Action/category.action';
+import app from '../../App.css'
 
 function AddProduct_admin(props) {
     const [open, setOpen] = useState(false);
@@ -246,7 +247,7 @@ function AddProduct_admin(props) {
                                         <option>Select Category</option>
                                         {
                                            finalData.map((values) => {
-                                                const { categoryname } = values;
+                                                const { id , categoryname } = values;
                                                 return(
                                                     <option value={categoryname}>{categoryname}</option>
                                                 )

@@ -12,7 +12,7 @@ import React from "react";
                             <div className="product-filters"> <ul>
                                     {uniqueList.map((valcat, index) => {
                                         return (
-                                            <li key={index} data-filter=".strawberry"  onClick={() => filterItem(valcat)}>{valcat}</li>
+                                            <li key={index} data-filter=""  onClick={() => filterItem(valcat)}>{valcat}</li>
                                         )
                                     })}
                                 </ul>

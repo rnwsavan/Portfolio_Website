@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import Navbar from '../../Container/Navbar/Navbar';
 import { getproductdata } from '../../Redux/Action/product.action';
 
 function Shop_sidebar(props) {
     const [Product, setProduct] = useState([]);
-    
 
+    const history = useHistory()
     const dispatch = useDispatch()
     const products = useSelector(state => state.product)
 
@@ -19,6 +19,11 @@ function Shop_sidebar(props) {
             })
         ),
     ];
+
+    const handleReadmore = (val) => {
+        console.log(val)
+        history.push('/product_detail', val)
+    }
 
     useEffect(
         () => {
@@ -91,8 +96,8 @@ function Shop_sidebar(props) {
                                             <div className="product-filter">
                                                 <h6 className="mb-20">Categories</h6>
                                                 <ul className="widget-nav-list">
-                                                
-                                                <a><Navbar filterItem={filterItem} uniqueList={uniqueList} /></a>
+
+                                                    <a><Navbar filterItem={filterItem} uniqueList={uniqueList} /></a>
                                                 </ul>
                                             </div>
                                         </div>
@@ -178,25 +183,35 @@ function Shop_sidebar(props) {
                                                                     <div className="single-product-item text-center" >
 
                                                                         <div className="products-images">
-                                                                        
-                                                                            <NavLink exact to={"/product_detail"}>
-                                                                                <img src={val.url} className="img-fluid" alt="Product Images" width={300} height={300} />
-                                                                            </NavLink>
-                                                                            <div className="product-actions">
-                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal"><i className="p-icon icon-plus" /><span className="tool-tip">Quick View</span></a>
 
-                                                                                <NavLink exact to={"/product_detail"}><i className="p-icon icon-bag2" /> <span className="tool-tip">Add to cart</span></NavLink>
-                                                                              
-                                                                                <NavLink exact to={"/whishlist"}><i className="p-icon icon-heart" /> <span className="tool-tip">Browse Wishlist</span></NavLink>
+
+                                                                            <img src={val.url} className="img-fluid" alt="Product Images" width={300} height={300} />
+
+                                                                            <div className="product-actions">
+                                                                                {/* <NavLink activeClassName='aptNav' ><i className="p-icon icon-plus" /><span className="tool-tip">Read More...</span></NavLink> */}
+                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal" onClick={() => { handleReadmore(val) }}><i className="p-icon icon-plus" /><span className="tool-tip">Read More...</span></a>
+
+                                                                                <a>
+                                                                                    <i className="p-icon icon-bag2" />
+                                                                                    <span className="tool-tip">Add to cart</span>
+                                                                                </a>
+
+                                                                                <a>
+                                                                                    <i className="p-icon icon-heart" />
+                                                                                    <span className="tool-tip">Browse Wishlist</span>
+                                                                                </a>
                                                                             </div>
                                                                         </div>
                                                                         <div className="product-content">
                                                                             <h6 className="prodect-title">
-                                                                               
-                                                                                <NavLink exact to={"/product_detail"}>{val.productname}</NavLink>
+
+                                                                                <a>{val.productname}</a>
                                                                             </h6>
                                                                             <div className="prodect-price">
                                                                                 <span className="new-price">{val.price}</span>
+                                                                            </div>
+                                                                            <div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>{/* Single Product Item End */}

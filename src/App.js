@@ -29,7 +29,6 @@ import { SnackbarProvider } from 'notistack';
 // import { configureStore } from './Redux/Store';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './Redux/Store';
-import Categories from './Components/Pages/Categories';
 import { AddProduct } from './Components/Pages/AddProduct';
 import Category_admin from './AdminPanel/Components/Category_admin';
 import AddProduct_admin from './AdminPanel/Components/AddProduct_admin';
@@ -47,7 +46,6 @@ function App() {
                 <PublicRoute exact path={"/"} component={Home} />
                 <PublicRoute exact path={"/category_admin"} component={Category_admin} />
                 <PublicRoute exact path={"/product_admin"} component={AddProduct_admin} />
-                <PublicRoute exact path={"/category"} component={Categories} />
                 <PublicRoute exact path={"/home"} component={Home} />
                 <PublicRoute exact path={"/about_us"} component={About_us} />
                 <PrivateRoute exact path={"/account"} component={Account} />
