@@ -1,27 +1,28 @@
 import *as ActionTypes from "../ActionType"
 
 const initialState = {
-    counter: 0
+    isLoading: false,
+    cart: [],
+    error: ''
 }
 
 export const cartReducer = (state = initialState, action) => {
-    // console.log(action.type, action.payload);
+    console.log(action.type, action.payload);
     switch (action.type) {
         case ActionTypes.ADD_TO_CART:
             return {
                 ...state,
-                counter: state.counter + 1
+                isLoading: false,
+                cart: state.cart.concat(action.payload),
+                error: ''
             }
-        case ActionTypes.REMOVE_TO_CART:
+        case ActionTypes.GET_TO_CART:
             return {
                 ...state,
-                counter: state.counter - 1
+                isLoading: false,
+                cart: state.cart.concat(action.payload),
+                error: ''
             }
-        // case ActionTypes.EMPTY_TO_CART:
-        //     return {
-        //         ...state,
-        //         counter: []
-        //     }
         default:
             return state
     }

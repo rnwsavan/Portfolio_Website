@@ -1,14 +1,23 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { addtocart } from '../../Redux/Action/cart.action';
 
 function Product_detail(props) {
     const ReadMoreVal = [props.location.state]
-    console.log(ReadMoreVal);
 
     const history = useHistory();
 
+    const dispatch = useDispatch()
+
     const handlehome = () => {
-        history.push("/")
+        history.push("/shop_sidebar")
+    }
+
+    const handlecart = (r) => {
+        dispatch(addtocart(r))
+        history.push("/cart")
+        // console.log(r.id);
     }
     return (
         <div>
@@ -53,7 +62,7 @@ function Product_detail(props) {
 
                                                         <div className="easyzoom-style">
                                                             <div className="easyzoom easyzoom--overlay">
-                                                                <a href="assets/images/product/single-product-01.webp" className="poppu-img">
+                                                                <a href="#" className="poppu-img">
                                                                     <img src={r.url} className="img-fluid" alt />
                                                                 </a>
                                                             </div>
@@ -116,12 +125,13 @@ function Product_detail(props) {
                                                             <div className="quickview-button">
                                                                 <div className="quickview-cart button">
                                                                     {/* <a href="product-details.html" className="btn--lg btn--black font-weight--reguler text-white">Add to cart</a> */}
-                                                                    <NavLink exact to={"/cart"} className="btn--lg btn--black font-weight--reguler text-white">Add to cart</NavLink>
+                                                                    <a className="btn--lg btn--black font-weight--reguler text-white" onClick={() => { handlecart(r) }}>Add to cart</a>
                                                                 </div>
                                                                 <div className="quickview-wishlist button">
                                                                     {/* <a title="Add to wishlist" href="#"><i className="icon-heart" /></a> */}
                                                                     <NavLink exact to={"/whishlist"}><i className="icon-heart" /></NavLink>
                                                                 </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -135,6 +145,9 @@ function Product_detail(props) {
                                                         </div>
                                                         <div className="tagged_as item_meta">
                                                             <span className="label">Tag: </span><a href="#">Pottery</a>
+                                                        </div>
+                                                        <div className="tagged_as item_meta">
+                                                            <span className="label">Product Page:</span> <a href="#" onClick={() => { handlehome() }}> Product</a>
                                                         </div>
                                                     </div>
                                                     <div className="product_socials section-space--mt_60">

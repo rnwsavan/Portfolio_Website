@@ -1,7 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getproductdata } from '../../Redux/Action/product.action';
+import { gettocart } from '../../Redux/Action/cart.action';
 
 function Cart(props) {
+    const cartdata = useSelector(state => state.cart)
+    const cart = cartdata.cart
+    console.log(cart);
+
+    const productdata = useSelector(state => state.product)
+    const products = productdata.product
+    console.log(products);
+
+    const dispatch = useDispatch();
+
+    const cartData = [];
+    productdata.map((p) => {
+        cartdata.map((c) => {
+            if(p.id === c.id){
+                cartData.push(p)
+            }
+        })
+    })
+
+    console.log(cartData);
+
+    useEffect(
+        () => {
+            dispatch(getproductdata())
+            dispatch(gettocart())
+        },
+        []
+    )
     return (
         <div>
             {/* breadcrumb-area start */}
@@ -11,7 +42,7 @@ function Cart(props) {
                         <div className="col-12">
                             <div className="row breadcrumb_box  align-items-center">
                                 <div className="col-lg-6 col-md-6 col-sm-6 text-center text-sm-start">
-                                    <h2 className="breadcrumb-title">Wishlist</h2>
+                                    <h2 className="breadcrumb-title">Cart</h2>
                                 </div>
                                 <div className="col-lg-6  col-md-6 col-sm-6">
                                     {/* breadcrumb-list start */}
@@ -20,7 +51,7 @@ function Cart(props) {
                                             {/* <a href="index-2.html">Home</a> */}
                                             <NavLink exact to={"/"}>Home</NavLink>
                                         </li>
-                                        <li className="breadcrumb-item active">Wishlist</li>
+                                        <li className="breadcrumb-item active">Cart</li>
                                     </ul>
                                     {/* breadcrumb-list end */}
                                 </div>
@@ -37,126 +68,91 @@ function Cart(props) {
                         <div className="cart-main-area  section-space--ptb_90">
                             <div className="container">
                                 <div className="row">
-                                    <div className="col-lg-12">
-                                        <form action="#">
-                                            <div className="table-content table-responsive cart-table-content header-color-gray">
-                                                <table>
-                                                    <thead>
-                                                        <tr className="bg-gray">
-                                                            <th />
-                                                            <th />
-                                                            <th className="product-name">Product</th>
-                                                            <th className="product-price"> Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total</th>
-                                                            <th />
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td />
-                                                            <td className="product-img">
-                                                                <a href="#"><img src="assets/images/product/small/cart-01.webp" alt /></a>
-                                                            </td>
-                                                            <td className="product-name"><a href="#">Plant pots</a></td>
-                                                            <td className="product-price"><span className="amount">$17.00</span></td>
-                                                            <td className="cart-quality">
-                                                                <div className="quickview-quality quality-height-dec2">
-                                                                    <div className="cart-plus-minus">
-                                                                        <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={2} />
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="price-total">
-                                                                <span className="amount">£ 635.00</span>
-                                                            </td>
-                                                            <td className="product-remove">
-                                                                <a href="#"><i className="icon-cross2" /></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td />
-                                                            <td className="product-img">
-                                                                <a href="#"><img src="assets/images/product/small/cart-02.webp" alt /></a>
-                                                            </td>
-                                                            <td className="product-name"><a href="#">Teapot with black tea</a></td>
-                                                            <td className="product-price"><span className="amount">$14.00</span></td>
-                                                            <td className="cart-quality">
-                                                                <div className="quickview-quality quality-height-dec2">
-                                                                    <div className="cart-plus-minus">
-                                                                        <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={2} />
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="price-total">
-                                                                <span className="amount">£ 635.00</span>
-                                                            </td>
-                                                            <td className="product-remove">
-                                                                <a href="#"><i className="icon-cross2" /></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td />
-                                                            <td className="product-img">
-                                                                <a href="#"><img src="assets/images/product/small/cart-03.webp" alt /></a>
-                                                            </td>
-                                                            <td className="product-name"><a href="#">Wooden Flowerpot</a></td>
-                                                            <td className="product-price"><span className="amount">$14.00</span></td>
-                                                            <td className="cart-quality">
-                                                                <div className="quickview-quality quality-height-dec2">
-                                                                    <div className="cart-plus-minus">
-                                                                        <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={2} />
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="price-total">
-                                                                <span className="amount">£ 635.00</span>
-                                                            </td>
-                                                            <td className="product-remove">
-                                                                <a href="#"><i className="icon-cross2" /></a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </form>
-                                        <div className="shoping-update-area row">
-                                            <div className="continue-shopping-butotn col-6 mt-30">
-                                                <a href="#" className="btn btn--lg btn--black"><i className="icon-arrow-left" /> Continue Shopping </a>
-                                            </div>
-                                            <div className="update-cart-button col-6 text-end mt-30">
-                                                <a href="#" className="btn btn--lg btn--border_1">Update cart</a>
-                                            </div>
-                                        </div>
-                                        <div className="cart-buttom-area">
-                                            <div className="row">
-                                                <div className="col-lg-6">
-                                                    <div className="discount-code section-space--mt_60">
-                                                        <h6 className="mb-30">Coupon Discount</h6>
-                                                        <p>Enter your coupon code if you have one.</p>
-                                                        <input type="text" name="name" placeholder="Coupon code" />
-                                                        <button className="coupon-btn btn btn--lg btn--border_1" type="submit">Apply coupon</button>
+                                    {cart.map((c) => (
+                                        <>
+                                            <div className="col-lg-12">
+                                                <form action="#">
+                                                    <div className="table-content table-responsive cart-table-content header-color-gray">
+                                                        <table>
+                                                            <thead>
+                                                                <tr className="bg-gray">
+                                                                    <th />
+                                                                    <th />
+                                                                    <th className="product-name">Product</th>
+                                                                    <th className="product-price"> Price</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Total</th>
+                                                                    <th />
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td />
+                                                                    <td className="product-img">
+                                                                        <a href="#"><img src={c.url} alt /></a>
+                                                                    </td>
+                                                                    <td className="product-name"><a href="#">{c.productname}</a></td>
+                                                                    <td className="product-price"><span className="amount">{c.price}</span></td>
+                                                                    <td className="cart-quality">
+                                                                        <div className="quickview-quality quality-height-dec2">
+                                                                            <div className="cart-plus-minus">
+                                                                                <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={2} />
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td className="price-total">
+                                                                        <span className="amount">£ 635.00</span>
+                                                                    </td>
+                                                                    <td className="product-remove">
+                                                                        <a href="#"><i className="icon-cross2" /></a>
+                                                                    </td>
+                                                                </tr>
+                                                               
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </form>
+                                                <div className="shoping-update-area row">
+                                                    <div className="continue-shopping-butotn col-6 mt-30">
+                                                        <a href="#" className="btn btn--lg btn--black"><i className="icon-arrow-left" /> Continue Shopping </a>
+                                                    </div>
+                                                    <div className="update-cart-button col-6 text-end mt-30">
+                                                        <a href="#" className="btn btn--lg btn--border_1">Update cart</a>
                                                     </div>
                                                 </div>
-                                                <div className="col-lg-6">
-                                                    <div className="cart_totals section-space--mt_60 ms-md-auto">
-                                                        <div className="grand-total-wrap">
-                                                            <div className="grand-total-content">
-                                                                <ul>
-                                                                    <li>Subtotal <span> $87.00</span></li>
-                                                                    <li>Total <span>$87.00</span> </li>
-                                                                </ul>
+                                                <div className="cart-buttom-area">
+                                                    <div className="row">
+                                                        <div className="col-lg-6">
+                                                            <div className="discount-code section-space--mt_60">
+                                                                <h6 className="mb-30">Coupon Discount</h6>
+                                                                <p>Enter your coupon code if you have one.</p>
+                                                                <input type="text" name="name" placeholder="Coupon code" />
+                                                                <button className="coupon-btn btn btn--lg btn--border_1" type="submit">Apply coupon</button>
                                                             </div>
                                                         </div>
-                                                        <div className="grand-btn mt-30">
-                                                            {/* <a href="#" className="btn--black btn--full text-center btn--lg">Proceed to checkout</a> */}
-                                                            <NavLink exact className="btn--black btn--full text-center btn--lg" to={"/checkout"}>Proceed to checkout</NavLink>
+                                                        <div className="col-lg-6">
+                                                            <div className="cart_totals section-space--mt_60 ms-md-auto">
+                                                                <div className="grand-total-wrap">
+                                                                    <div className="grand-total-content">
+                                                                        <ul>
+                                                                            <li>Subtotal <span> $87.00</span></li>
+                                                                            <li>Total <span>$87.00</span> </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="grand-btn mt-30">
+                                                                    {/* <a href="#" className="btn--black btn--full text-center btn--lg">Proceed to checkout</a> */}
+                                                                    <NavLink exact className="btn--black btn--full text-center btn--lg" to={"/checkout"}>Proceed to checkout</NavLink>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </>
+                                    ))
+
+                                    }
                                 </div>
                             </div>
                         </div>

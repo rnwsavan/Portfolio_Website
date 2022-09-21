@@ -6,13 +6,8 @@ import { addtocart } from '../../Redux/Action/cart.action';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
-    const count = useSelector(state => state.counter)
-    console.log(count);
     const dispatch = useDispatch()
-
-    const increment = () => {
-        dispatch(addtocart())
-    }
+    
     let auth = useSelector(state => state.auth)
     // console.log(auth);
     const handleLogout = () => {
@@ -194,7 +189,7 @@ function Header(props) {
                                         </a> */}
                                         <NavLink exact to={"/cart"} className=" header-cart minicart-btn toolbar-btn header-icon">
                                         <i className="icon-bag2" />
-                                            <span className="item-counter" onClick={() => increment()}>0</span>
+                                            <span className="item-counter">0</span>
                                         </NavLink>
                                     </div>
                                     <div className="header-right-items d-block d-md-none">

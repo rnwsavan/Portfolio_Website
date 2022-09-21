@@ -55,7 +55,7 @@ function App() {
                 <PublicRoute exact path={"/contact"} component={Contact} />
                 <PublicRoute exact path={"/comming"} component={Comming_Soon} />
                 <PublicRoute exact path={"/checkout"} component={Checkout} />
-                <PrivateRoute exact path={"/cart"} component={Cart} />
+                <PublicRoute exact path={"/cart"} component={Cart} />
                 <PublicRoute exact path={"/blog"} component={Blog} />
                 <PublicRoute exact path={"/blog_grid"} component={Blog_grid} />
                 <PrivateRoute exact path={"/order"} component={Order} />
