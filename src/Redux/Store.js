@@ -12,7 +12,7 @@ const middleware =[thunk, sagaMiddleware]
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist : ['cart']
+    whitelist : ['cart','Counter']
   }
 
   const persistedReducer = persistReducer(persistConfig, rootReducer)

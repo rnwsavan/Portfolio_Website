@@ -1,10 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { addtocart } from '../../Redux/Action/cart.action';
 
+
 function Product_detail(props) {
     const ReadMoreVal = [props.location.state]
+   
 
     const history = useHistory();
 
@@ -19,6 +21,8 @@ function Product_detail(props) {
         history.push("/cart")
         // console.log(r.id);
     }
+
+    
     return (
         <div>
             {/* breadcrumb-area start */}
@@ -119,7 +123,8 @@ function Product_detail(props) {
                                                         <div className="quickview-cart-box">
                                                             <div className="quickview-quality">
                                                                 <div className="cart-plus-minus">
-                                                                    <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={0} />
+                                                                    <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={1} />
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div className="quickview-button">
@@ -131,7 +136,7 @@ function Product_detail(props) {
                                                                     {/* <a title="Add to wishlist" href="#"><i className="icon-heart" /></a> */}
                                                                     <NavLink exact to={"/whishlist"}><i className="icon-heart" /></NavLink>
                                                                 </div>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>

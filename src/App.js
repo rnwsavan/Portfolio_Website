@@ -58,7 +58,7 @@ function App() {
                 <PublicRoute exact path={"/cart"} component={Cart} />
                 <PublicRoute exact path={"/blog"} component={Blog} />
                 <PublicRoute exact path={"/blog_grid"} component={Blog_grid} />
-                <PrivateRoute exact path={"/order"} component={Order} />
+                <PublicRoute exact path={"/order"} component={Order} />
                 <PublicRoute exact path={"/product_groupped"} component={Product_groupped} />
                 <Route exact path={"/addproduct"} component={AddProduct} />
                 <PublicRoute exact path={"/product_detail"} component={Product_detail} />
@@ -67,7 +67,7 @@ function App() {
                 <PublicRoute exact path={"/shop_sidebar"} component={Shop_sidebar} />
                 <Route exact path={"/whishlist"} component={Wishlist} />
               </Switch>
-              {/* <Footer /> */}
+              <Footer />
           </PersistGate>
         </Provider>
       </SnackbarProvider>

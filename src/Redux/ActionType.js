@@ -1,6 +1,11 @@
+// CART
+
 export const ADD_TO_CART = "ADD_TO_CART"
 export const GET_TO_CART = "GET_TO_CART"
-export const EMPTY_TO_CART = "EMPTY_TO_CART"
+export const DELETE_CART = "DELETE_CART"
+
+
+// AUTH
 
 export const EMAIL_VARIFICATION ="EMAIL_VARIFICATION"
 export const AUTH_LOGIN = "AUTH_LOGIN"
@@ -12,6 +17,8 @@ export const LOGOUT_USER = "LOGOUT_USER"
 export const LOGGEDOUT_USER = "LOGGEDOUT_USER"
 
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
+
+// ALERT
 
 export const SET_ALERT = "SET_ALERT"
 export const RESET_ALERT = "RESET_ALERT"
@@ -31,3 +38,8 @@ export const ADD_PRODUCTS = 'ADD_PRODUCTS'
 export const UPDATE_PRODUCTS = 'UPDATE_PRODUCTS'
 export const DELETE_PRODUCTS = 'DELETE_PRODUCTS'
 export const ERROR_PRODUCTS = 'ERROR_PRODUCTS'
+
+// COUNTER
+
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'

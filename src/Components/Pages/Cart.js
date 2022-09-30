@@ -1,35 +1,69 @@
-import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getproductdata } from '../../Redux/Action/product.action';
-import { gettocart } from '../../Redux/Action/cart.action';
+import { decrementcounter, DeletecartAction, incrementcounter } from '../../Redux/Action/cart.action';
 
 function Cart(props) {
     const cartdata = useSelector(state => state.cart)
-    const cart = cartdata.cart
-    console.log(cart);
-
     const productdata = useSelector(state => state.product)
-    const products = productdata.product
-    console.log(products);
+    // console.log(productdata , cartdata);
+    // const Count = useSelector(state => state.Counter);
 
+    const history = useHistory();
+
+    const handleshop = () => {
+        history.push("/shop_sidebar")
+    }
+
+    const handleorder = () => {
+        history.push("/order")
+    }
+
+    const handleIncrement = (id) => {
+        dispatch(incrementcounter(id))
+    }
+
+    const handleDecrement = (id) => {
+        dispatch(decrementcounter(id))
+    }
+
+    const handleDelete = (id) => {
+        dispatch(DeletecartAction(id));
+    }
+    
     const dispatch = useDispatch();
 
     const cartData = [];
-    productdata.map((p) => {
-        cartdata.map((c) => {
-            if(p.id === c.id){
-                cartData.push(p)
+    let Total;
+
+    cartdata.cart.map((c => {
+        productdata.product.map((p) => {
+            if (p.id === c.id) {
+                const data = {
+                    ...p,
+                    quntity: c.quntity
+                }
+                cartData.push(data)
             }
         })
+    }))
+
+    let TotalAmount = 0;
+    cartData.map((c) => {
+        Total = parseInt(c.price)  * c.quntity;
+        TotalAmount = TotalAmount + Total;
     })
 
-    console.log(cartData);
+    const Discount = Math.round(TotalAmount * 0.05);
+    const FinalAmount = TotalAmount - Discount;
+
+    console.log(Total);
+
 
     useEffect(
         () => {
             dispatch(getproductdata())
-            dispatch(gettocart())
         },
         []
     )
@@ -68,91 +102,99 @@ function Cart(props) {
                         <div className="cart-main-area  section-space--ptb_90">
                             <div className="container">
                                 <div className="row">
-                                    {cart.map((c) => (
-                                        <>
-                                            <div className="col-lg-12">
-                                                <form action="#">
-                                                    <div className="table-content table-responsive cart-table-content header-color-gray">
-                                                        <table>
-                                                            <thead>
-                                                                <tr className="bg-gray">
-                                                                    <th />
-                                                                    <th />
-                                                                    <th className="product-name">Product</th>
-                                                                    <th className="product-price"> Price</th>
-                                                                    <th>Quantity</th>
-                                                                    <th>Total</th>
-                                                                    <th />
-                                                                </tr>
-                                                            </thead>
+
+                                    <div className="col-lg-12">
+                                        <form action="#">
+                                            <div className="table-content table-responsive cart-table-content header-color-gray">
+                                                <table>
+                                                    <thead>
+                                                        <tr className="bg-gray">
+                                                            <th />
+                                                            <th />
+                                                            <th className="product-name">Product</th>
+                                                            <th className="product-price"> Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Total</th>
+                                                            <th />
+                                                        </tr>
+                                                    </thead>
+                                                    {cartData.map((c) => (
+                                                        <>
                                                             <tbody>
                                                                 <tr>
                                                                     <td />
-                                                                    <td className="product-img">
-                                                                        <a href="#"><img src={c.url} alt /></a>
+                                                                    <td>
+                                                                        <a href="#"><img src={c.url} width={100} alt /></a>
                                                                     </td>
                                                                     <td className="product-name"><a href="#">{c.productname}</a></td>
-                                                                    <td className="product-price"><span className="amount">{c.price}</span></td>
+                                                                    <td className="product-price"><span className="amount">${c.price}</span></td>
                                                                     <td className="cart-quality">
                                                                         <div className="quickview-quality quality-height-dec2">
                                                                             <div className="cart-plus-minus">
-                                                                                <input className="cart-plus-minus-box" type="text" name="qtybutton" defaultValue={2} />
+                                                                                {/* <input  type="text" name="qtybutton" defaultValue={2} /> */}
+                                                                                <button className="cart-plus-minus-box" onClick={() => handleIncrement(c.id)}>+</button>
+                                                                                <span style={{margin: '8px', fontWeight: "bold"}} defaultValue={1}>{c.quntity}</span>
+                                                                                <button className="cart-plus-minus-box" disabled={c.quntity === 1 && true}  onClick={() => handleDecrement(c.id)}>-</button>
+
                                                                             </div>
                                                                         </div>
                                                                     </td>
                                                                     <td className="price-total">
-                                                                        <span className="amount">£ 635.00</span>
+                                                                        <span className="amount">${c.price*c.quntity}</span>
                                                                     </td>
                                                                     <td className="product-remove">
-                                                                        <a href="#"><i className="icon-cross2" /></a>
+                                                                        <a href="#" onClick={() => handleDelete(c.id)}><i className="icon-cross2" /></a>
                                                                     </td>
                                                                 </tr>
-                                                               
+
                                                             </tbody>
-                                                        </table>
-                                                    </div>
-                                                </form>
-                                                <div className="shoping-update-area row">
-                                                    <div className="continue-shopping-butotn col-6 mt-30">
-                                                        <a href="#" className="btn btn--lg btn--black"><i className="icon-arrow-left" /> Continue Shopping </a>
-                                                    </div>
-                                                    <div className="update-cart-button col-6 text-end mt-30">
-                                                        <a href="#" className="btn btn--lg btn--border_1">Update cart</a>
-                                                    </div>
+                                                        </>
+                                                    ))
+
+                                                    }
+                                                </table>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                    <div className="shoping-update-area row">
+                                        <div className="continue-shopping-butotn col-6 mt-30">
+                                            <a href="#" onClick={() => { handleshop() }} className="btn btn--lg btn--black"><i className="icon-arrow-left" /> Continue Shopping </a>
+                                        </div>
+                                        <div className="update-cart-button col-6 text-end mt-30">
+                                            <a href="#" className="btn btn--lg btn--border_1">Update cart</a>
+                                        </div>
+                                    </div>
+                                    <div className="cart-buttom-area">
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <div className="discount-code section-space--mt_60">
+                                                    <h6 className="mb-30">Coupon Discount</h6>
+                                                    <p>Enter your coupon code if you have one.</p>
+                                                    <input type="text" name="name" placeholder="Coupon code" />
+                                                    <button className="coupon-btn btn btn--lg btn--border_1" type="submit">Apply coupon</button>
                                                 </div>
-                                                <div className="cart-buttom-area">
-                                                    <div className="row">
-                                                        <div className="col-lg-6">
-                                                            <div className="discount-code section-space--mt_60">
-                                                                <h6 className="mb-30">Coupon Discount</h6>
-                                                                <p>Enter your coupon code if you have one.</p>
-                                                                <input type="text" name="name" placeholder="Coupon code" />
-                                                                <button className="coupon-btn btn btn--lg btn--border_1" type="submit">Apply coupon</button>
-                                                            </div>
+                                            </div>
+                                            <div className="col-lg-6">
+                                                <div className="cart_totals section-space--mt_60 ms-md-auto">
+                                                    <div className="grand-total-wrap">
+                                                        <div className="grand-total-content">
+                                                            <ul>
+                                                                <li>Subtotal ({cartData.length} item) <span> ${TotalAmount}</span></li>
+                                                                <li>Discount<span>- ${Discount}</span></li>
+                                                                <li>Total <span>${FinalAmount}</span> </li>
+                                                            </ul>
+                                                            <p className='save'>You will save ${Discount} on this order</p>
                                                         </div>
-                                                        <div className="col-lg-6">
-                                                            <div className="cart_totals section-space--mt_60 ms-md-auto">
-                                                                <div className="grand-total-wrap">
-                                                                    <div className="grand-total-content">
-                                                                        <ul>
-                                                                            <li>Subtotal <span> $87.00</span></li>
-                                                                            <li>Total <span>$87.00</span> </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="grand-btn mt-30">
-                                                                    {/* <a href="#" className="btn--black btn--full text-center btn--lg">Proceed to checkout</a> */}
-                                                                    <NavLink exact className="btn--black btn--full text-center btn--lg" to={"/checkout"}>Proceed to checkout</NavLink>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    </div>
+                                                    <div className="grand-btn mt-30">
+                                                        <a href="#" onClick={() => { handleorder() }} className="btn--black btn--full text-center btn--lg">Proceed to checkout</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </>
-                                    ))
-
-                                    }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
