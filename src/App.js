@@ -4,12 +4,10 @@ import Header from './Container/Header/Header';
 import Footer from './Container/Footer/Footer';
 import Home from './Components/Pages/Home';
 import About_us from './Components/Pages/About_us';
-import Wishlist from './Components/Pages/Wishlist';
 import Shop_sidebar from './Components/Pages/Shop_sidebar';
 import Shop_border from './Components/Pages/Shop_border';
 import Product_on_sale from './Components/Pages/Product_on_sale';
 import Product_groupped from './Components/Pages/Product_groupped';
-import Order from './Components/Pages/Order';
 import Login from './Components/Pages/Login';
 import Faq from './Components/Pages/Faq';
 import Error_Page from './Components/Pages/Error_Page';
@@ -29,7 +27,6 @@ import { SnackbarProvider } from 'notistack';
 // import { configureStore } from './Redux/Store';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './Redux/Store';
-import { AddProduct } from './Components/Pages/AddProduct';
 import Category_admin from './AdminPanel/Components/Category_admin';
 import AddProduct_admin from './AdminPanel/Components/AddProduct_admin';
 
@@ -41,7 +38,7 @@ function App() {
       <SnackbarProvider maxSnack={3}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor} >
-              {/* <Header /> */}
+              <Header />
               <Switch>
                 <PublicRoute exact path={"/"} component={Home} />
                 <PublicRoute exact path={"/category_admin"} component={Category_admin} />
@@ -58,14 +55,11 @@ function App() {
                 <PublicRoute exact path={"/cart"} component={Cart} />
                 <PublicRoute exact path={"/blog"} component={Blog} />
                 <PublicRoute exact path={"/blog_grid"} component={Blog_grid} />
-                <PublicRoute exact path={"/order"} component={Order} />
                 <PublicRoute exact path={"/product_groupped"} component={Product_groupped} />
-                <Route exact path={"/addproduct"} component={AddProduct} />
                 <PublicRoute exact path={"/product_detail"} component={Product_detail} />
                 <PublicRoute exact path={"/product_sale"} component={Product_on_sale} />
                 <PublicRoute exact path={"/shop_border"} component={Shop_border} />
                 <PublicRoute exact path={"/shop_sidebar"} component={Shop_sidebar} />
-                <Route exact path={"/whishlist"} component={Wishlist} />
               </Switch>
               <Footer />
           </PersistGate>

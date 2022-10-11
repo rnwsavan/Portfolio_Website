@@ -95,14 +95,6 @@ function Header(props) {
                                                                 {/* <a href="my-account.html"><span>My Account</span></a> */}
                                                                 <NavLink exact to={"/account"}><span>My Account</span></NavLink>
                                                             </li>
-                                                            <li>
-                                                                {/* <a href="wishlist.html"><span>Wishlist</span></a> */}
-                                                                <NavLink exact to={"/wishlist"}><span>Wishlist</span></NavLink>
-                                                            </li>
-                                                            <li>
-                                                                {/* <a href="order-tracking.html"><span>Order Tracking</span></a> */}
-                                                                <NavLink exact to={"/order"}><span>Order Tracking</span></NavLink>
-                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <li>

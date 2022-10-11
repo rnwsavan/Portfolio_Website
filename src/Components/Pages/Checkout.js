@@ -1,7 +1,66 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Formik, useFormik } from 'formik';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { postorder } from '../../Redux/Action/order.action';
+import * as yup from 'yup';
+import { Button, Form } from 'reactstrap';
+import { DialogActions, DialogContent, TextField } from '@mui/material';
+import { decrementcounter, DeletecartAction, incrementcounter } from '../../Redux/Action/cart.action';
+
 
 function Checkout(props) {
+
+    const dispatch = useDispatch();
+    const [placeorder, setPlaceorder] = useState(false)
+    const [cartData, setCartData] = useState([])
+
+    const history = useHistory()
+
+    let TotalAmount = 0;
+    let Total;
+    cartData.map((c) => {
+        Total = parseInt(c.price)  * c.quntity;
+        TotalAmount = TotalAmount + Total;
+    })
+
+    const Discount = Math.round(TotalAmount * 0.05);
+    const FinalAmount = TotalAmount - Discount;
+
+    console.log(Total);
+
+
+
+    let schema = yup.object().shape({
+        user_name: yup.string().required("Please enter name"),
+        user_email: yup.string().required("Please enter email"),
+        user_address: yup.string().required("please enter address").max(100, 'Must be exactly 100 digits'),
+        user_phone: yup.number().required("please enter Phone number"),
+
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            user_name: '',
+            user_email: '',
+            user_address: "",
+            user_phone: "",
+        },
+        validationSchema: schema,
+        onSubmit: (values, { resetForm }) => {
+            const submitorder = {
+                userDetails: values,
+                cartDetails: cartData
+            };
+            history.push('/')
+            dispatch(postorder(submitorder))
+            resetForm();
+
+        }
+
+
+    });
+
     return (
         <div>
             <main>
@@ -16,6 +75,8 @@ function Checkout(props) {
                                             <p className="cart-page-title">Returning customer? <a className="checkout-click-login" href="#"> Click here to login</a></p>
                                             <div className="checkout-login-info">
                                                 <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
+
+
                                                 <form action="#" className="account-form-box">
                                                     <div className="single-input mt-20">
                                                         <label>Username or email <span className="required">*</span></label>
@@ -34,6 +95,7 @@ function Checkout(props) {
                                                         <a href="#" className="btn btn--lg btn--black">Login</a>
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -55,81 +117,92 @@ function Checkout(props) {
                                         <div className="col-lg-7">
                                             <div className="billing-info-wrap mr-100">
                                                 <h6 className="mb-20">Billing Details</h6>
+
+
+
+
                                                 <div className="row">
-                                                    <div className="col-lg-6 col-md-6">
-                                                        <div className="billing-info mb-25">
-                                                            <label>First name <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-6 col-md-6">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Last name <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Company name (optional) <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="billing-select mb-25">
-                                                            <label>Country <span className="required" title="required">*</span></label>
-                                                            <select className="select-active">
-                                                                <option>Azerbaijan</option>
-                                                                <option>Bahamas</option>
-                                                                <option>Bahrain</option>
-                                                                <option>Bangladesh</option>
-                                                                <option>Barbados</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Street address <span className="required" title="required">*</span></label>
-                                                            <input className="billing-address" placeholder="House number and street name" type="text" />
-                                                            <input placeholder="Apartment, suite, unit etc. (optional)" type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Town / City <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <div className="billing-select mb-25">
-                                                            <label>District <span className="required" title="required">*</span></label>
-                                                            <select className="select-active">
-                                                                <option>Azerbaijan</option>
-                                                                <option>Bahamas</option>
-                                                                <option>Bahrain</option>
-                                                                <option>Bangladesh</option>
-                                                                <option>Barbados</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12 col-md-12">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Postcode / ZIP (optional) <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12 col-md-12">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Phone <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-lg-12 col-md-12">
-                                                        <div className="billing-info mb-25">
-                                                            <label>Email Address <span className="required" title="required">*</span></label>
-                                                            <input type="text" />
-                                                        </div>
-                                                    </div>
+                                                    
+
+                                                        <Formik value={formik}>
+                                                            <Form key={formik} onSubmit={formik.handleSubmit}>
+                                                                <DialogContent>
+
+                                                                    <TextField
+
+                                                                        margin="dense"
+                                                                        id="user_name"
+                                                                        name="user_name"
+                                                                        value={formik.values.user_name}
+                                                                        label="Name"
+                                                                        fullWidth
+                                                                        variant="standard"
+                                                                        onChange={formik.handleChange}
+
+                                                                    />
+                                                                    {
+                                                                        formik.errors.user_name ? <p>{formik.errors.user_name}</p> : null
+                                                                    }
+
+                                                                    <TextField
+
+                                                                        margin="dense"
+                                                                        id="user_email"
+                                                                        name="user_email"
+                                                                        value={formik.values.user_email}
+                                                                        label="email"
+                                                                        fullWidth
+                                                                        variant="standard"
+                                                                        onChange={formik.handleChange}
+
+                                                                    />
+                                                                    {
+                                                                        formik.errors.user_email ? <p>{formik.errors.user_email}</p> : null
+                                                                    }
+
+                                                                    <TextField
+
+                                                                        margin="dense"
+                                                                        id="user_address"
+                                                                        name="user_address"
+                                                                        value={formik.values.user_address}
+                                                                        label="Address"
+                                                                        fullWidth
+                                                                        variant="standard"
+                                                                        onChange={formik.handleChange}
+
+                                                                    />
+                                                                    {
+                                                                        formik.errors.user_address ? <p>{formik.errors.user_address}</p> : null
+                                                                    }
+
+                                                                    <TextField
+
+                                                                        margin="dense"
+                                                                        id="user_phone"
+                                                                        name="user_phone"
+                                                                        value={formik.values.user_phone}
+                                                                        label="phone Number"
+                                                                        fullWidth
+                                                                        variant="standard"
+                                                                        onChange={formik.handleChange}
+
+                                                                    />
+                                                                    {
+                                                                        formik.errors.user_phone ? <p>{formik.errors.user_phone}</p> : null
+                                                                    }
+
+
+
+                                                                </DialogContent>
+                                                                <DialogActions>
+                                                                    <Button type="submit">Submit</Button>
+                                                                </DialogActions>
+                                                            </Form>
+                                                        </Formik>
+                                                 
                                                 </div>
+
                                                 <div className="additional-info-wrap">
                                                     <h6 className="mb-10">Additional information</h6>
                                                     <label>Order notes (optional)</label>
@@ -148,20 +221,24 @@ function Checkout(props) {
                                                                     <li>Product <span>Total</span></li>
                                                                 </ul>
                                                             </div>
+                                                        { 
+                                                         cartData.map((k) => (
                                                             <div className="your-order-middle">
                                                                 <ul>
-                                                                    <li>Product Name X 1 <span>£329 </span></li>
-                                                                    <li>Product Name X 3 <span>£39 </span></li>
+                                                                    <li>{k.product_name} <span>${k.product_price} </span></li>
                                                                 </ul>
                                                             </div>
+                                                             ))
+                                                            }
+
                                                             <div className="your-order-info order-subtotal">
                                                                 <ul>
-                                                                    <li><strong>Subtotal</strong> <span>£369 </span></li>
+                                                                    <li><strong>Subtotal ({cartData.length} item)</strong> <span> ${TotalAmount} </span></li>
                                                                 </ul>
                                                             </div>
                                                             <div className="your-order-info order-total">
                                                                 <ul>
-                                                                    <li><strong>Total</strong> <span>£369.00 </span></li>
+                                                                    <li><strong>Total</strong> <span>${FinalAmount} </span></li>
                                                                 </ul>
                                                             </div>
                                                             <div className="payment-area mt-30">
@@ -181,8 +258,7 @@ function Checkout(props) {
                                                     <p className="mt-30">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.</p>
                                                 </div>
                                                 <div className="place-order mt-30">
-                                                    {/* <a href="#" className="btn--full btn--black btn--lg text-center">Place Order</a> */}
-                                                    <NavLink exact className="btn--full btn--black btn--lg text-center" to={"/order"}>Place Order</NavLink>
+                                                    <butoon className="btn--full btn--black btn--lg text-center">Checkout</butoon>
                                                 </div>
                                             </div>
                                         </div>

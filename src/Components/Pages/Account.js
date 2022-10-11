@@ -31,210 +31,210 @@ function Account(props) {
             </div>
             {/* breadcrumb-area end */}
             <main>
-            <div id="main-wrapper">
-                <div className="site-wrapper-reveal border-bottom">
-                    <div className="my-account-page-warpper section-space--ptb_120">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col">
-                                    {/* My Account Page Start */}
-                                    <div className="myaccount-page-wrapper">
-                                        <div className="row">
-                                            {/* My Account Tab Menu Start */}
-                                            <div className="col-lg-3 col-md-4">
-                                                <div className="myaccount-tab-menu nav" role="tablist">
-                                                    <a href="#dashboad" className="active" data-bs-toggle="tab"><i className="fa fa-dashboard" />
-                                                        Dashboard</a>
-                                                    <a href="#orders" data-bs-toggle="tab"><i className="fa fa-cart-arrow-down" /> Orders</a>
-                                                    <a href="#download" data-bs-toggle="tab"><i className="fa fa-cloud-download" /> Download</a>
-                                                    <a href="#payment-method" data-bs-toggle="tab"><i className="fa fa-credit-card" /> Payment Method</a>
-                                                    <a href="#address-edit" data-bs-toggle="tab"><i className="fa fa-map-marker" /> address</a>
-                                                    <a href="#account-info" data-bs-toggle="tab"><i className="fa fa-user" /> Account Details</a>
-                                                    <a href="login.html"><i className="fa fa-sign-out" /> Logout</a>
+                <div id="main-wrapper">
+                    <div className="site-wrapper-reveal border-bottom">
+                        <div className="my-account-page-warpper section-space--ptb_120">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col">
+                                        {/* My Account Page Start */}
+                                        <div className="myaccount-page-wrapper">
+                                            <div className="row">
+                                                {/* My Account Tab Menu Start */}
+                                                <div className="col-lg-3 col-md-4">
+                                                    <div className="myaccount-tab-menu nav" role="tablist">
+                                                        <a href="#dashboad" className="active" data-bs-toggle="tab"><i className="fa fa-dashboard" />
+                                                            Dashboard</a>
+                                                        <a href="#orders" data-bs-toggle="tab"><i className="fa fa-cart-arrow-down" /> Orders</a>
+                                                        <a href="#download" data-bs-toggle="tab"><i className="fa fa-cloud-download" /> Download</a>
+                                                        <a href="#payment-method" data-bs-toggle="tab"><i className="fa fa-credit-card" /> Payment Method</a>
+                                                        <a href="#address-edit" data-bs-toggle="tab"><i className="fa fa-map-marker" /> address</a>
+                                                        <a href="#account-info" data-bs-toggle="tab"><i className="fa fa-user" /> Account Details</a>
+                                                        <a href="login.html"><i className="fa fa-sign-out" /> Logout</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            {/* My Account Tab Menu End */}
-                                            {/* My Account Tab Content Start */}
-                                            <div className="col-lg-9 col-md-8">
-                                                <div className="tab-content" id="myaccountContent">
-                                                    {/* Single Tab Content Start */}
-                                                    <div className="tab-pane fade show active" id="dashboad" role="tabpanel">
-                                                        <div className="myaccount-content">
-                                                            <h3 className="title">Dashboard</h3>
-                                                            <div className="welcome">
-                                                                <p>Hello, <strong>Alex Aya</strong> (If Not <strong>Aya !</strong><a href="login.html" className="logout"> Logout</a>)</p>
-                                                            </div>
-                                                            <p className="mb-0">From your account dashboard. you can easily check &amp; view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
-                                                        </div>
-                                                    </div>
-                                                    {/* Single Tab Content End */}
-                                                    {/* Single Tab Content Start */}
-                                                    <div className="tab-pane fade" id="orders" role="tabpanel">
-                                                        <div className="myaccount-content">
-                                                            <h3 className="title">Orders</h3>
-                                                            <div className="myaccount-table table-responsive text-center">
-                                                                <table className="table table-bordered">
-                                                                    <thead className="thead-light">
-                                                                        <tr>
-                                                                            <th>Order</th>
-                                                                            <th>Date</th>
-                                                                            <th>Status</th>
-                                                                            <th>Total</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>1</td>
-                                                                            <td>Aug 22, 2018</td>
-                                                                            <td>Pending</td>
-                                                                            <td>$3000</td>
-                                                                            <td><a href="cart.html" className="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2</td>
-                                                                            <td>July 22, 2018</td>
-                                                                            <td>Approved</td>
-                                                                            <td>$200</td>
-                                                                            <td><a href="cart.html" className="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>3</td>
-                                                                            <td>June 12, 2019</td>
-                                                                            <td>On Hold</td>
-                                                                            <td>$990</td>
-                                                                            <td><a href="cart.html" className="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                {/* My Account Tab Menu End */}
+                                                {/* My Account Tab Content Start */}
+                                                <div className="col-lg-9 col-md-8">
+                                                    <div className="tab-content" id="myaccountContent">
+                                                        {/* Single Tab Content Start */}
+                                                        <div className="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                                            <div className="myaccount-content">
+                                                                <h3 className="title">Dashboard</h3>
+                                                                <div className="welcome">
+                                                                    <p>Hello, <strong>Alex Aya</strong> (If Not <strong>Aya !</strong><a href="login.html" className="logout"> Logout</a>)</p>
+                                                                </div>
+                                                                <p className="mb-0">From your account dashboard. you can easily check &amp; view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    {/* Single Tab Content End */}
-                                                    {/* Single Tab Content Start */}
-                                                    <div className="tab-pane fade" id="download" role="tabpanel">
-                                                        <div className="myaccount-content">
-                                                            <h3 className="title">Downloads</h3>
-                                                            <div className="myaccount-table table-responsive text-center">
-                                                                <table className="table table-bordered">
-                                                                    <thead className="thead-light">
-                                                                        <tr>
-                                                                            <th>Product</th>
-                                                                            <th>Date</th>
-                                                                            <th>Expire</th>
-                                                                            <th>Download</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>Haven - Free Real Estate PSD Template</td>
-                                                                            <td>Aug 22, 2018</td>
-                                                                            <td>Yes</td>
-                                                                            <td><a href="#" className="btn btn btn-dark btn-hover-primary rounded-0"><i className="fa fa-cloud-download me-1" /> Download File</a></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>HasTech - Profolio Business Template</td>
-                                                                            <td>Sep 12, 2018</td>
-                                                                            <td>Never</td>
-                                                                            <td><a href="#" className="btn btn btn-dark btn-hover-primary rounded-0"><i className="fa fa-cloud-download me-1" /> Download File</a></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                                        {/* Single Tab Content End */}
+                                                        {/* Single Tab Content Start */}
+                                                        <div className="tab-pane fade" id="orders" role="tabpanel">
+                                                            <div className="myaccount-content">
+                                                                <h3 className="title">Orders</h3>
+                                                                <div className="myaccount-table table-responsive text-center">
+                                                                    <table className="table table-bordered">
+                                                                        <thead className="thead-light">
+                                                                            <tr>
+                                                                                <th>Order</th>
+                                                                                <th>Date</th>
+                                                                                <th>Status</th>
+                                                                                <th>Total</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>1</td>
+                                                                                <td>Aug 22, 2018</td>
+                                                                                <td>Pending</td>
+                                                                                <td>$3000</td>
+                                                                                <td><a href="cart.html" className="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>2</td>
+                                                                                <td>July 22, 2018</td>
+                                                                                <td>Approved</td>
+                                                                                <td>$200</td>
+                                                                                <td><a href="cart.html" className="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>3</td>
+                                                                                <td>June 12, 2019</td>
+                                                                                <td>On Hold</td>
+                                                                                <td>$990</td>
+                                                                                <td><a href="cart.html" className="btn btn btn-dark btn-hover-primary btn-sm rounded-0">View</a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    {/* Single Tab Content End */}
-                                                    {/* Single Tab Content Start */}
-                                                    <div className="tab-pane fade" id="payment-method" role="tabpanel">
-                                                        <div className="myaccount-content">
-                                                            <h3 className="title">Payment Method</h3>
-                                                            <p className="saved-message">You Can't Saved Your Payment Method yet.</p>
+                                                        {/* Single Tab Content End */}
+                                                        {/* Single Tab Content Start */}
+                                                        <div className="tab-pane fade" id="download" role="tabpanel">
+                                                            <div className="myaccount-content">
+                                                                <h3 className="title">Downloads</h3>
+                                                                <div className="myaccount-table table-responsive text-center">
+                                                                    <table className="table table-bordered">
+                                                                        <thead className="thead-light">
+                                                                            <tr>
+                                                                                <th>Product</th>
+                                                                                <th>Date</th>
+                                                                                <th>Expire</th>
+                                                                                <th>Download</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>Haven - Free Real Estate PSD Template</td>
+                                                                                <td>Aug 22, 2018</td>
+                                                                                <td>Yes</td>
+                                                                                <td><a href="#" className="btn btn btn-dark btn-hover-primary rounded-0"><i className="fa fa-cloud-download me-1" /> Download File</a></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>HasTech - Profolio Business Template</td>
+                                                                                <td>Sep 12, 2018</td>
+                                                                                <td>Never</td>
+                                                                                <td><a href="#" className="btn btn btn-dark btn-hover-primary rounded-0"><i className="fa fa-cloud-download me-1" /> Download File</a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    {/* Single Tab Content End */}
-                                                    {/* Single Tab Content Start */}
-                                                    <div className="tab-pane fade" id="address-edit" role="tabpanel">
-                                                        <div className="myaccount-content">
-                                                            <h3 className="title">Billing Address</h3>
-                                                            <address>
-                                                                <p><strong>Alex Aya</strong></p>
-                                                                <p>1234 Market ##, Suite 900 <br />
-                                                                    Lorem Ipsum, ## 12345</p>
-                                                                <p>Mobile: (123) 123-456789</p>
-                                                            </address>
-                                                            <a href="#" className="btn btn btn-dark btn-hover-primary rounded-0"><i className="fa fa-edit me-2" />Edit Address</a>
+                                                        {/* Single Tab Content End */}
+                                                        {/* Single Tab Content Start */}
+                                                        <div className="tab-pane fade" id="payment-method" role="tabpanel">
+                                                            <div className="myaccount-content">
+                                                                <h3 className="title">Payment Method</h3>
+                                                                <p className="saved-message">You Can't Saved Your Payment Method yet.</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    {/* Single Tab Content End */}
-                                                    {/* Single Tab Content Start */}
-                                                    <div className="tab-pane fade" id="account-info" role="tabpanel">
-                                                        <div className="myaccount-content">
-                                                            <h3 className="title">Account Details</h3>
-                                                            <div className="account-details-form">
-                                                                <form action="#">
-                                                                    <div className="row">
-                                                                        <div className="col-lg-6">
-                                                                            <div className="single-input-item mb-3">
-                                                                                <label htmlFor="first-name" className="required mb-1">First Name</label>
-                                                                                <input type="text" id="first-name" placeholder="First Name" />
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="col-lg-6">
-                                                                            <div className="single-input-item mb-3">
-                                                                                <label htmlFor="last-name" className="required mb-1">Last Name</label>
-                                                                                <input type="text" id="last-name" placeholder="Last Name" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="single-input-item mb-3">
-                                                                        <label htmlFor="display-name" className="required mb-1">Display Name</label>
-                                                                        <input type="text" id="display-name" placeholder="Display Name" />
-                                                                    </div>
-                                                                    <div className="single-input-item mb-3">
-                                                                        <label htmlFor="email" className="required mb-1">Email Addres</label>
-                                                                        <input type="email" id="email" placeholder="Email Address" />
-                                                                    </div>
-                                                                    <fieldset>
-                                                                        <legend>Password change</legend>
-                                                                        <div className="single-input-item mb-3">
-                                                                            <label htmlFor="current-pwd" className="required mb-1">Current Password</label>
-                                                                            <input type="password" id="current-pwd" placeholder="Current Password" />
-                                                                        </div>
+                                                        {/* Single Tab Content End */}
+                                                        {/* Single Tab Content Start */}
+                                                        <div className="tab-pane fade" id="address-edit" role="tabpanel">
+                                                            <div className="myaccount-content">
+                                                                <h3 className="title">Billing Address</h3>
+                                                                <address>
+                                                                    <p><strong>Alex Aya</strong></p>
+                                                                    <p>1234 Market ##, Suite 900 <br />
+                                                                        Lorem Ipsum, ## 12345</p>
+                                                                    <p>Mobile: (123) 123-456789</p>
+                                                                </address>
+                                                                <a href="#" className="btn btn btn-dark btn-hover-primary rounded-0"><i className="fa fa-edit me-2" />Edit Address</a>
+                                                            </div>
+                                                        </div>
+                                                        {/* Single Tab Content End */}
+                                                        {/* Single Tab Content Start */}
+                                                        <div className="tab-pane fade" id="account-info" role="tabpanel">
+                                                            <div className="myaccount-content">
+                                                                <h3 className="title">Account Details</h3>
+                                                                <div className="account-details-form">
+                                                                    <form action="#">
                                                                         <div className="row">
                                                                             <div className="col-lg-6">
                                                                                 <div className="single-input-item mb-3">
-                                                                                    <label htmlFor="new-pwd" className="required mb-1">New Password</label>
-                                                                                    <input type="password" id="new-pwd" placeholder="New Password" />
+                                                                                    <label htmlFor="first-name" className="required mb-1">First Name</label>
+                                                                                    <input type="text" id="first-name" placeholder="First Name" />
                                                                                 </div>
                                                                             </div>
                                                                             <div className="col-lg-6">
                                                                                 <div className="single-input-item mb-3">
-                                                                                    <label htmlFor="confirm-pwd" className="required mb-1">Confirm Password</label>
-                                                                                    <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
+                                                                                    <label htmlFor="last-name" className="required mb-1">Last Name</label>
+                                                                                    <input type="text" id="last-name" placeholder="Last Name" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </fieldset>
-                                                                    <div className="single-input-item single-item-button">
-                                                                        <button className="btn btn btn-dark btn-hover-primary rounded-0">Save Changes</button>
-                                                                    </div>
-                                                                </form>
+                                                                        <div className="single-input-item mb-3">
+                                                                            <label htmlFor="display-name" className="required mb-1">Display Name</label>
+                                                                            <input type="text" id="display-name" placeholder="Display Name" />
+                                                                        </div>
+                                                                        <div className="single-input-item mb-3">
+                                                                            <label htmlFor="email" className="required mb-1">Email Addres</label>
+                                                                            <input type="email" id="email" placeholder="Email Address" />
+                                                                        </div>
+                                                                        <fieldset>
+                                                                            <legend>Password change</legend>
+                                                                            <div className="single-input-item mb-3">
+                                                                                <label htmlFor="current-pwd" className="required mb-1">Current Password</label>
+                                                                                <input type="password" id="current-pwd" placeholder="Current Password" />
+                                                                            </div>
+                                                                            <div className="row">
+                                                                                <div className="col-lg-6">
+                                                                                    <div className="single-input-item mb-3">
+                                                                                        <label htmlFor="new-pwd" className="required mb-1">New Password</label>
+                                                                                        <input type="password" id="new-pwd" placeholder="New Password" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className="col-lg-6">
+                                                                                    <div className="single-input-item mb-3">
+                                                                                        <label htmlFor="confirm-pwd" className="required mb-1">Confirm Password</label>
+                                                                                        <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                        <div className="single-input-item single-item-button">
+                                                                            <button className="btn btn btn-dark btn-hover-primary rounded-0">Save Changes</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div> {/* Single Tab Content End */}
+                                                        </div> {/* Single Tab Content End */}
+                                                    </div>
                                                 </div>
+                                                {/* My Account Tab Content End */}
                                             </div>
-                                            {/* My Account Tab Content End */}
                                         </div>
+                                        {/* My Account Page End */}
                                     </div>
-                                    {/* My Account Page End */}
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {/*====================  footer area ====================*/}
-                {/* <div className="footer-area-wrapper">
+                    {/*====================  footer area ====================*/}
+                    {/* <div className="footer-area-wrapper">
                     <div className="footer-area section-space--ptb_120">
                         <div className="container">
                             <div className="row footer-widget-wrapper">
@@ -341,8 +341,8 @@ function Account(props) {
                         </div>
                     </div>
                 </div> */}
-                {/*====================  End of footer area  ====================*/}
-            </div>
+                    {/*====================  End of footer area  ====================*/}
+                </div>
             </main>
             {/* Modal */}
             <div className="product-modal-box modal fade" id="prodect-modal" tabIndex={-1} role="dialog">
