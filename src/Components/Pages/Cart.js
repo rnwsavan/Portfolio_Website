@@ -16,6 +16,10 @@ function Cart(props) {
         history.push("/shop_sidebar")
     }
 
+    const handleprodetail = () => {
+        history.push("/product_detail")
+    }
+
     const handleorder = () => {
         history.push("/order")
     }
@@ -124,7 +128,7 @@ function Cart(props) {
                                                                 <tr>
                                                                     <td />
                                                                     <td>
-                                                                        <a href="#"><img src={c.url} width={100} alt /></a>
+                                                                        <a href="#" onClick={() => handleprodetail()}><img src={c.url} width={100} alt /></a>
                                                                     </td>
                                                                     <td className="product-name"><a href="#">{c.productname}</a></td>
                                                                     <td className="product-price"><span className="amount">${c.price}</span></td>

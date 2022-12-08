@@ -91,29 +91,6 @@ function Login(props) {
     }
   })
 
-  // const formik1 = useFormik({
-  //   initialValues: initVal,
-  //   validationSchema: schema,
-  //   onSubmit: (values, { resetForm }) => {
-  //     if (useType === "Signup" && !reset) {
-
-  //       // handleSignup(values)
-  //       dispatch(SignupUser(values))
-  //     } else if (userType === "Login" && !reset) {
-
-  //       // handleLogin(values)
-  //       dispatch(LoginUser(values))
-
-  //     } else {
-
-  //       handlepassword(values)
-
-  //     }
-  //     resetForm();
-  //   }
-  // })
-
-
   console.log(formik.errors);
 
   return (

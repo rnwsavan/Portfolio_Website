@@ -67,7 +67,7 @@ function Product_detail(props) {
                                                         <div className="easyzoom-style">
                                                             <div className="easyzoom easyzoom--overlay">
                                                                 <a href="#" className="poppu-img">
-                                                                    <img src={r.url} className="img-fluid" alt />
+                                                                    <img src={r.url} className="img-fluid" />
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -80,7 +80,7 @@ function Product_detail(props) {
                                             <div className="col-lg-5 col-md-6 col-sm-12 col-xs-12">
                                                 <div className="product-details-content ">
                                                     <h5 className="font-weight--reguler mb-10">{r.productname}</h5>
-                                                    <h3 className="price">{r.price}</h3>
+                                                    <h3 className="price">${r.price}</h3>
                                                     <div className="quickview-peragraph mt-10">
                                                         <p>At vero accusamus et iusto odio dignissimos blanditiis praesentiums dolores molest.</p>
                                                     </div>

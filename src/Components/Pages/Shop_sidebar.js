@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import Navbar from '../../Container/Navbar/Navbar';
+import { addtocart } from '../../Redux/Action/cart.action';
 import { getproductdata } from '../../Redux/Action/product.action';
 
 function Shop_sidebar(props) {
@@ -22,6 +23,11 @@ function Shop_sidebar(props) {
 
     const handleReadmore = (val) => {
         history.push('/product_detail', val)
+    }
+
+    const handleCart = (r) => {
+        dispatch(addtocart(r))
+        history.push('/cart', r)
     }
 
     useEffect(
@@ -128,9 +134,9 @@ function Shop_sidebar(props) {
                                                 <ul className="widget-nav-list">
                                                     <li><a href="#">$0.00 - $20.00</a></li>
                                                     <li><a href="#">$20.00 - $40.00</a></li>
-                                                    <li><a href="#">£40.00 - £50.00</a></li>
-                                                    <li><a href="#">£50.00 - £60.00</a></li>
-                                                    <li><a href="#">£60.00 +</a></li>
+                                                    <li><a href="#">$40.00 - $50.00</a></li>
+                                                    <li><a href="#">$50.00 - $60.00</a></li>
+                                                    <li><a href="#">$60.00 +</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -162,7 +168,7 @@ function Shop_sidebar(props) {
                                                                                 {/* <NavLink activeClassName='aptNav' ><i className="p-icon icon-plus" /><span className="tool-tip">Read More...</span></NavLink> */}
                                                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#prodect-modal" onClick={() => { handleReadmore(val) }}><i className="p-icon icon-plus" /><span className="tool-tip">Read More...</span></a>
 
-                                                                                <a>
+                                                                                <a href='#' onClick={() => { handleCart(val) }}>
                                                                                     <i className="p-icon icon-bag2" />
                                                                                     <span className="tool-tip">Add to cart</span>
                                                                                 </a>
@@ -179,7 +185,7 @@ function Shop_sidebar(props) {
                                                                                 <a>{val.productname}</a>
                                                                             </h6>
                                                                             <div className="prodect-price">
-                                                                                <span className="new-price">{val.price}</span>
+                                                                                <span className="new-price">${val.price}</span>
                                                                             </div>
                                                                             <div>
 

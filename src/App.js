@@ -40,8 +40,8 @@ function App() {
     <>
       <SnackbarProvider maxSnack={3}>
         <Provider store={store}>
+              <Header />
           <PersistGate loading={null} persistor={persistor} >
-              {/* <Header /> */}
               <Switch>
                 <PublicRoute exact path={"/"} component={Home} />
                 <PublicRoute exact path={"/category_admin"} component={Category_admin} />
