@@ -165,7 +165,7 @@ function Category_admin(props) {
             <Container>
                 <div>
                     <center>
-                        <Button className='text-center' variant="outlined" onClick={() => handleClickOpen()}>
+                        <Button className='text-center' style={{marginTop:"100px"}} variant="outlined" onClick={() => handleClickOpen()}>
                             ADD
                         </Button>
                     </center>
