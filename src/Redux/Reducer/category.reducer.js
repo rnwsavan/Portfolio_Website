@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const categoriesreducer = (state = initialState, action) => {
-    // console.log(action.type, action.payload, state);
+    console.log(action.type, action.payload, state);
     switch (action.type) {
         case ActionTypes.GET_CATOGORIES:
             return {

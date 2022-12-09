@@ -3,6 +3,7 @@ import { alertReducer } from "./alert.reducer";
 import { authReducer } from "./auth.reducer";
 import { cartReducer } from "./cart.reducer";
 import { categoriesreducer } from "./category.reducer";
+import { OrderReducer } from "./order.reducer";
 import { productreducer } from "./product.reducer";
 
 export const rootReducer = combineReducers({
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
     alert : alertReducer,
     category : categoriesreducer,
     product : productreducer,
+    order : OrderReducer
 })
