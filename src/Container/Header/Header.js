@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { LogoutUser } from '../../Redux/Action/auth.action';
-import { addtocart } from '../../Redux/Action/cart.action';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
@@ -43,38 +42,16 @@ function Header(props) {
                                                 </ul>
                                             </li>
                                             <li className="has-children">
-                                                <a href="#"><span>Shop</span></a>
+                                                {/* <a href="#"><span>Shop</span></a> */}
+                                                <NavLink exact to={"/shop_sidebar"}><span>Shop</span></NavLink>
                                                 {/* mega menu */}
                                                 <ul className="megamenu megamenu--mega">
                                                     <li>
                                                         <h2 className="page-list-title">Shop Pages</h2>
                                                         <ul>
                                                             <li>
-                                                                {/* <a href="shop-with-boder.html"><span>Shop With Border</span></a> */}
-                                                                <NavLink exact to={"/shop_border"}><span>Shop With Border</span></NavLink>
-                                                            </li>
-                                                            <li>
                                                                 {/* <a href="shop-left-sidebar.html"><span>Shop Left Sidebar</span></a> */}
                                                                 <NavLink exact to={"/shop_sidebar"}><span>Shop Left Sidebar</span></NavLink>
-                                                            </li>
-
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <h2 className="page-list-title">Product Pages</h2>
-                                                        <ul>
-                                                            <li>
-                                                                {/* <a href="product-details.html"><span>Default</span></a> */}
-                                                                <NavLink exact to={"/product_detail"}><span>Default</span></NavLink>
-                                                            </li>
-
-                                                            <li>
-                                                                {/* <a href="product-groupped.html"><span>Groupped</span></a> */}
-                                                                <NavLink exact to={"/product_groupped"}><span>Groupped</span></NavLink>
-                                                            </li>
-                                                            <li>
-                                                                {/* <a href="product-on-sale.html"><span>On Sale</span></a> */}
-                                                                <NavLink exact to={"/product_sale"}><span>On Sale</span></NavLink>
                                                             </li>
 
                                                         </ul>
@@ -159,21 +136,6 @@ function Header(props) {
                             </div>
                             <div className="col-lg-3 col-lg-3 col-6">
                                 <div className="header-right-side text-end">
-                                    <div className="header-right-items  d-none d-md-block">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <i className="icon-user" />
-                                        </a>
-                                    </div>
-                                    <div className="header-right-items d-none d-md-block">
-                                        {/* <a href="wishlist.html" className="header-cart">
-                                            <i className="icon-heart" />
-                                            <span className="item-counter">3</span>
-                                        </a> */}
-                                        <NavLink exact to={"/whishlist"} className="header-cart">
-                                        <i className="icon-heart" />
-                                            <span className="item-counter">3</span>
-                                        </NavLink>
-                                    </div>
                                     <div className="header-right-items">
                                         {/* <a href="#miniCart" className=" header-cart minicart-btn toolbar-btn header-icon">
                                             <i className="icon-bag2" />
@@ -181,18 +143,7 @@ function Header(props) {
                                         </a> */}
                                         <NavLink exact to={"/cart"} className=" header-cart minicart-btn toolbar-btn header-icon">
                                         <i className="icon-bag2" />
-                                            <span className="item-counter">0</span>
                                         </NavLink>
-                                    </div>
-                                    <div className="header-right-items d-block d-md-none">
-                                        <a href="javascript:void(0)" className="search-icon" id="search-overlay-trigger">
-                                            <i className="icon-magnifier" />
-                                        </a>
-                                    </div>
-                                    <div className="header-right-items">
-                                        <a href="#" className="mobile-navigation-icon" id="mobile-menu-trigger">
-                                            <i className="icon-menu" />
-                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -1,18 +1,17 @@
 import { Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { postorder } from '../../Redux/Action/order.action';
 import * as yup from 'yup';
 import { Button, Form } from 'reactstrap';
 import { DialogActions, DialogContent, TextField } from '@mui/material';
-import { decrementcounter, DeletecartAction, incrementcounter } from '../../Redux/Action/cart.action';
 
 
 function Checkout(props) {
 
     const dispatch = useDispatch();
-    const [placeorder, setPlaceorder] = useState(false)
+    // const [placeorder, setPlaceorder] = useState(false)
     const [cartData, setCartData] = useState([])
 
     const history = useHistory()
@@ -72,7 +71,10 @@ function Checkout(props) {
                                 <div className="row">
                                     <div className="col-lg-7">
                                         <div className="customer-zone mb-30">
-                                            <p className="cart-page-title">Returning customer? <a className="checkout-click-login" href="#"> Click here to login</a></p>
+                                            <p className="cart-page-title">Returning customer? 
+                                            {/* <a className="checkout-click-login" href="#"> Click here to login</a> */}
+                                            <NavLink ecact to={"/login"} className="checkout-click-login">Click here to login</NavLink>
+                                            </p>
                                             <div className="checkout-login-info">
                                                 <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
 
@@ -256,9 +258,6 @@ function Checkout(props) {
                                                 </div>
                                                 <div className="payment-method">
                                                     <p className="mt-30">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.</p>
-                                                </div>
-                                                <div className="place-order mt-30">
-                                                    <butoon className="btn--full btn--black btn--lg text-center">Checkout</butoon>
                                                 </div>
                                             </div>
                                         </div>

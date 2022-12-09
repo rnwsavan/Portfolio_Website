@@ -132,10 +132,6 @@ function Product_detail(props) {
                                                                     {/* <a href="product-details.html" className="btn--lg btn--black font-weight--reguler text-white">Add to cart</a> */}
                                                                     <a className="btn--lg btn--black font-weight--reguler text-white" onClick={() => { handlecart(r) }}>Add to cart</a>
                                                                 </div>
-                                                                <div className="quickview-wishlist button">
-                                                                    {/* <a title="Add to wishlist" href="#"><i className="icon-heart" /></a> */}
-                                                                    <NavLink exact to={"/whishlist"}><i className="icon-heart" /></NavLink>
-                                                                </div>
 
                                                             </div>
                                                         </div>

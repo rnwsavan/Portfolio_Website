@@ -21,7 +21,7 @@ function Cart(props) {
     }
 
     const handleorder = () => {
-        history.push("/order")
+        history.push("/checkout")
     }
 
     const handleIncrement = (id) => {
